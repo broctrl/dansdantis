@@ -33,7 +33,7 @@
             text-decoration: none;
         }
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
@@ -63,6 +63,18 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+        }
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .image-gallery img {
+            width: 300px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -97,6 +109,10 @@
             </div>
             <p>L'Inferno di Dante è la prima parte della Divina Commedia e rappresenta una discesa nel regno dell'oltretomba, guidata dal poeta Virgilio. Ogni cerchio infernale rappresenta una punizione per un particolare peccato, con i dannati condannati a tormenti e sofferenze in base alla gravità dei loro misfatti.</p>
             <p>L'Inferno è strutturato in nove cerchi concentrici, che vanno dal Limbo, dove risiedono le anime dei non battezzati e dei virtuosi pagani, fino al Cocito, il più profondo e gelido dei cerchi, riservato a traditori e traditori.</p>
+            <div class="image-gallery">
+                <img src="cerchi.jpg" alt="Struttura dei Nove Cerchi">
+                <img src="dante.jpg" alt="Dante Alighieri">
+            </div>
         </section>
         
         <section class="section">
