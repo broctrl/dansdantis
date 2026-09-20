@@ -34,14 +34,16 @@
     );
 
     /* ----------------------------------------------------------------------
-       Scorrimento comandato dallo script
-       La preferenza «meno movimento» non vale solo per il foglio di stile: le
-       due scorrimenti decisi dal copione — il ritorno in cima e il salto a una
-       terzina — devono rispettarla anche loro.
+       Movimento comandato dallo script
+       La preferenza «meno movimento» non vale solo per il foglio di stile: gli
+       effetti che il copione decide da sé — i due scorrimenti e il passaggio
+       di tema — devono rispettarla anche loro.
        ---------------------------------------------------------------------- */
 
-    const scorrimentoFluido = () =>
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    const menoMovimento = () =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const scorrimentoFluido = () => (menoMovimento() ? "auto" : "smooth");
 
     /* ----------------------------------------------------------------------
        Tema (notte / pergamena)
@@ -76,14 +78,149 @@
         }
     }
 
+    /* ----------------------------------------------------------------------
+       Lo sviluppo del tema nuovo
+       Il tema non arriva di colpo: si sviluppa da un cerchio che parte dal
+       pulsante — il punto che l'occhio sta guardando — e si allarga fino a
+       coprire lo schermo. Due strade per lo stesso disegno: la transizione di
+       vista, che tiene il tema vecchio sotto quello nuovo e lascia ritagliare
+       il nuovo a cerchio; e, dove quella non c'è, un velo della tinta del tema
+       nuovo, che si allarga e poi sfuma.
+       ---------------------------------------------------------------------- */
+
+    const DURATA_TEMA = 620;
+
+    /* Parte decisa e finisce lunga: un cerchio che si allarga e si ferma di
+       colpo sembra inceppato. */
+    const CURVA_TEMA = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+    const cerchio = (x, y, raggio) => `circle(${raggio}px at ${x}px ${y}px)`;
+
+    /* Il raggio serve intero: il cerchio deve arrivare anche all'angolo più
+       lontano dal punto di partenza. Il pulsante può essere fuori vista (la
+       scorciatoia da tastiera vale anche a pagina scorsa), quindi il punto si
+       riporta dentro lo schermo, altrimenti il cerchio entrerebbe da fuori. */
+    function partenzaDelCerchio(bottone) {
+        const area = bottone ? bottone.getBoundingClientRect() : null;
+        const dentro = (valore, limite) => Math.min(Math.max(valore, 0), limite);
+        const x = dentro(area ? area.left + area.width / 2 : window.innerWidth / 2, window.innerWidth);
+        const y = dentro(area ? area.top + area.height / 2 : 0, window.innerHeight);
+        return {
+            x,
+            y,
+            raggio: Math.hypot(
+                Math.max(x, window.innerWidth - x),
+                Math.max(y, window.innerHeight - y),
+            ),
+        };
+    }
+
+    const SPARIZIONE_TEMA = 240;
+
+    /* Il ripiego, per i motori che non hanno la transizione di vista: un velo
+       della tinta del tema che sta per arrivare. La tinta si chiede al foglio
+       di stile per nome, perché il tema non è ancora cambiato e `var(--bg)`
+       direbbe quella vecchia. */
+    function veloDelTema({ x, y, raggio, fondo, cambia }) {
+        const velo = document.createElement("div");
+        velo.className = "velo-tema";
+        velo.setAttribute("aria-hidden", "true");
+        velo.style.background = fondo;
+        velo.style.clipPath = cerchio(x, y, 0);
+        document.body.append(velo);
+
+        let scambiato = false;
+
+        /* Il tema cambia quando il velo copre tutto: sotto non c'è più niente
+           da vedere, quindi lo scambio non si nota. Una volta sola, perché ci
+           arrivano sia la fine dell'animazione sia la rete di sicurezza. */
+        const scambia = () => {
+            if (scambiato) return;
+            scambiato = true;
+            cambia();
+            const sparire = velo.animate(
+                { opacity: [1, 0] },
+                { duration: SPARIZIONE_TEMA, easing: "ease-out", fill: "forwards" },
+            );
+            sparire.addEventListener("finish", () => velo.remove());
+        };
+
+        try {
+            const crescere = velo.animate(
+                { clipPath: [cerchio(x, y, 0), cerchio(x, y, raggio)] },
+                { duration: DURATA_TEMA, easing: CURVA_TEMA, fill: "forwards" },
+            );
+            crescere.addEventListener("finish", scambia);
+        } catch (e) {
+            /* Motore che non sa animare un ritaglio: il tema cambia e il velo
+               non si vede nemmeno. */
+            velo.remove();
+            scambia();
+        }
+
+        /* Rete di sicurezza: una scheda in secondo piano non emette la fine di
+           un'animazione, e il velo non deve restare lì sopra la pagina. */
+        setTimeout(scambia, DURATA_TEMA + 400);
+    }
+
     function giraTema() {
         const nuovo = temaAttuale() === "chiaro" ? "notte" : "chiaro";
-        applicaTema(nuovo);
-        try {
-            localStorage.setItem(CHIAVE_TEMA, nuovo);
-        } catch (e) {
-            /* la memoria locale può essere negata: il tema vale per la pagina */
+        const cambia = () => {
+            applicaTema(nuovo);
+            try {
+                localStorage.setItem(CHIAVE_TEMA, nuovo);
+            } catch (e) {
+                /* la memoria locale può essere negata: il tema vale per la pagina */
+            }
+        };
+
+        /* Con «meno movimento» il tema cambia e basta: il cerchio che si
+           allarga è un movimento, e chi ha chiesto di non vederne non se lo
+           deve ritrovare qui. */
+        if (menoMovimento()) {
+            cambia();
+            return;
         }
+
+        const { x, y, raggio } = partenzaDelCerchio(q('[data-azione="tema"]'));
+
+        if (typeof document.startViewTransition === "function") {
+            try {
+                const passaggio = document.startViewTransition(cambia);
+                /* La transizione disegna da sé il tema vecchio e quello nuovo;
+                   il cerchio non è altro che un ritaglio del nuovo, che si
+                   allarga e lascia scoperto l'altro. */
+                passaggio.ready
+                    .then(() =>
+                        document.documentElement.animate(
+                            { clipPath: [cerchio(x, y, 0), cerchio(x, y, raggio)] },
+                            {
+                                duration: DURATA_TEMA,
+                                easing: CURVA_TEMA,
+                                pseudoElement: "::view-transition-new(root)",
+                            },
+                        ),
+                    )
+                    .catch(() => {
+                        /* Passaggio saltato, di solito perché un altro era già in
+                           corso: il tema è cambiato lo stesso, non resta da
+                           disegnare niente. */
+                    });
+                return;
+            } catch (e) {
+                /* Motore che rifiuta il passaggio: si prosegue col velo. */
+            }
+        }
+
+        veloDelTema({
+            x,
+            y,
+            raggio,
+            fondo: getComputedStyle(document.documentElement)
+                .getPropertyValue(nuovo === "chiaro" ? "--fondo-pergamena" : "--fondo-notte")
+                .trim(),
+            cambia,
+        });
     }
 
     applicaTema(temaAttuale());

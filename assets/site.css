@@ -4,7 +4,13 @@
    ========================================================================== */
 
 :root {
-    --bg: #100e0d;
+    /* I due fondi, ciascuno con un nome: il passaggio di tema disegna il suo
+       velo con la tinta del tema che sta per arrivare, e per chiederla al
+       foglio non può aspettare che il tema sia già cambiato — `--bg` in quel
+       momento è ancora quella vecchia. */
+    --fondo-notte: #100e0d;
+    --fondo-pergamena: #f3ece0;
+    --bg: var(--fondo-notte);
     --bg-2: #17130f;
     --surface: #201a16;
     --surface-2: #2a221c;
@@ -59,7 +65,7 @@
 }
 
 html[data-tema="chiaro"] {
-    --bg: #f3ece0;
+    --bg: var(--fondo-pergamena);
     --bg-2: #eae0d0;
     --surface: #fbf6ec;
     --surface-2: #f0e7d7;
@@ -359,6 +365,34 @@ input.controllo {
 html[data-tema="notte"] .icona-luna,
 html[data-tema="chiaro"] .icona-sole {
     display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Il passaggio di tema
+
+   Il tema nuovo si sviluppa da un cerchio che parte dal pulsante, e lo decide
+   il copione: dipende dal punto toccato e da quanto dista dagli angoli dello
+   schermo, che il foglio di stile non sa. Qui si spengono le due animazioni
+   predefinite della transizione di vista — una dissolvenza fra i due disegni —
+   e si preparano i due livelli che il cerchio scopre.
+   -------------------------------------------------------------------------- */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* Dove la transizione di vista non c'è, il cerchio è un velo della tinta del
+   tema nuovo: si allarga, il tema cambia quando copre tutto, il velo sfuma. */
+.velo-tema {
+    position: fixed;
+    inset: 0;
+    /* Sopra ogni cosa, tavola a piena pagina compresa: il cerchio deve poter
+       coprire tutta la pagina, non solo il suo contenuto. */
+    z-index: 200;
+    pointer-events: none;
+    will-change: clip-path, opacity;
 }
 
 /* Le sagome dei piccoli comandi: si riempiono con il colore del testo che

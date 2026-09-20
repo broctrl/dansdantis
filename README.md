@@ -90,6 +90,24 @@ e mezzo per cento, due proprietà che il motore di disegno compone da sé, perch
 tavole una sfocatura per ciascuna sarebbe cara. La copertina, che è una sola e grande, si
 concede anche la messa a fuoco: entra sfocata e si fa nitida.
 
+## Il passaggio di tema
+
+Il tema non cambia di colpo: quello nuovo si sviluppa da un cerchio che parte dal pulsante —
+il punto che l'occhio sta guardando — e si allarga fino a coprire lo schermo. Lo fa la
+**transizione di vista**, che tiene in pagina il tema vecchio sotto quello nuovo e lascia
+ritagliare il nuovo a cerchio (`::view-transition-new(root)`, ritagliato da `clip-path`);
+dove non c'è, il cerchio è un velo della tinta del tema nuovo, che si allarga, cambia il
+tema quando copre tutto e poi sfuma. Il velo non è mai l'ultima cosa che si vede: se il
+motore non lo sa disegnare, viene tolto e il tema cambia lo stesso, perché un ripiego che
+riesce a romperli tutti e due è peggio di nessun ripiego.
+
+L'animazione la decide il copione, non il foglio di stile: il raggio è la distanza del
+pulsante dall'angolo più lontano, che il CSS non sa calcolare, e la durata è una sola per
+entrambe le strade. Il foglio tiene i due fondi con un nome — `--fondo-notte` e
+`--fondo-pergamena` — perché il velo va disegnato con la tinta del tema che sta per
+arrivare, e in quel momento `--bg` è ancora quella vecchia. Con **«meno movimento»** attivo
+non c'è nessuna animazione: il tema cambia e basta.
+
 ## La copertina, misurata invece che scelta a occhio
 
 Il riquadro della copertina è verticale e l'incisione è orizzontale: a tutta altezza `cover`
