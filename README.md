@@ -186,6 +186,9 @@ Lo stesso controllo gira da solo a ogni spinta su `main` e a ogni richiesta di u
 non corrisponde ai wikitext di partenza, poi esegue `tools/verifica.mjs`. Una pagina
 generata e versata a metà non passa più in silenzio.
 
+Come mettere il sito in linea — su GitHub Pages o su un altro servizio — è descritto passo
+per passo in [`DEPLOY.md`](DEPLOY.md).
+
 ## Tavole di Doré
 
 Le incisioni sono enumerate in `tools/dore-plates.json` e descritte da
