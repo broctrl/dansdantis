@@ -162,6 +162,79 @@
     }
 
     /* ----------------------------------------------------------------------
+       Immagini: segnaposto e comparsa
+       Le misure dichiarate nel documento tengono già il posto giusto, quindi
+       il segnaposto non serve a evitare gli scarti: serve a dire che qualcosa
+       sta arrivando, invece di lasciare un rettangolo vuoto. I riquadri che
+       lo mostrano portano `data-scheletro`; quando la tavola arriva, la
+       dissolvenza si aggiunge e si toglie da sé. L'immagine non è mai
+       nascosta d'ufficio: se il motore di disegno si ferma a metà, quello che
+       si vede resta.
+       ---------------------------------------------------------------------- */
+
+    function immagineArrivata(img, esito) {
+        const riquadro = img.closest("[data-scheletro]");
+        if (riquadro) {
+            riquadro.dataset[esito] = "true";
+            /* Uno stato non resta appeso all'altro: o è arrivata, o non è
+               arrivata. Con entrambi scritti, chi legge il documento non sa
+               più quale dei due credere. */
+            delete riquadro.dataset[esito === "pronta" ? "errore" : "pronta"];
+            /* Arrivata o fallita, il luccichio non ha più nulla da dire. */
+            delete riquadro.dataset.attesa;
+            if (osservatoreAttesa) osservatoreAttesa.unobserve(riquadro);
+        }
+        if (esito !== "pronta") return;
+        img.classList.add("appena-arrivata");
+        /* La classe si toglie quando l'animazione finisce, non dopo un tempo
+           deciso qui: la copertina si mette a fuoco in nove decimi di secondo
+           e le tavole si posano in sei, e un taglio a metà si vedrebbe. Il
+           tempo resta come rete di sicurezza per chi non riceve l'evento. */
+        const fine = () => {
+            img.classList.remove("appena-arrivata");
+            img.removeEventListener("animationend", fine);
+        };
+        img.addEventListener("animationend", fine);
+        setTimeout(fine, 1500);
+    }
+
+    /* L'animazione del segnaposto costa, e in pagina ci sono cinquantaquattro
+       tavole: accenderla per tutte sarebbe un luccichio che nessuno vede.
+       Questo osservatore la accende solo dove il riquadro sta per entrare
+       nello schermo; il margine anticipa l'arrivo perché quando la tavola si
+       affaccia il segnaposto stia già girando. */
+    const osservatoreAttesa = "IntersectionObserver" in window
+        ? new IntersectionObserver(
+              (voci) => {
+                  for (const voce of voci) {
+                      if (!voce.isIntersecting) continue;
+                      voce.target.dataset.attesa = "true";
+                      osservatoreAttesa.unobserve(voce.target);
+                  }
+              },
+              { rootMargin: "300px 0px" },
+          )
+        : null;
+
+    function osservaImmagine(img) {
+        /* Un'immagine senza sorgente non è un errore: è la tavola della
+           lightbox, che aspetta di essere aperta. Senza questa riga la
+           figura risultava guasta fin dal primo disegno della pagina. */
+        if (!img.getAttribute("src")) return;
+        if (!img.complete) {
+            img.addEventListener("load", () => immagineArrivata(img, "pronta"), { once: true });
+            img.addEventListener("error", () => immagineArrivata(img, "errore"), { once: true });
+            const riquadro = img.closest("[data-scheletro]");
+            if (riquadro && osservatoreAttesa) osservatoreAttesa.observe(riquadro);
+            return;
+        }
+        /* Già in memoria: o disegnata, o fallita. */
+        immagineArrivata(img, img.naturalWidth > 0 ? "pronta" : "errore");
+    }
+
+    for (const img of qa("[data-scheletro] img")) osservaImmagine(img);
+
+    /* ----------------------------------------------------------------------
        Pulsante di cancellazione dei campi di ricerca
        <input type="search"> ne porta uno disegnato dal sistema, che ignora il
        tema della pagina; il foglio di stile lo spegne e questo lo rimpiazza.
@@ -171,8 +244,14 @@
         const pulisci = document.createElement("button");
         pulisci.type = "button";
         pulisci.className = "ricerca-pulisci";
-        pulisci.textContent = "✕";
         pulisci.setAttribute("aria-label", "Cancella la ricerca");
+        /* La croce è disegnata, non il carattere «✕»: quello lo rende il
+           sistema, con un disegno suo e un colore che non è quello del
+           comando. */
+        const croce = document.createElement("span");
+        croce.className = "icona-croce";
+        croce.setAttribute("aria-hidden", "true");
+        pulisci.appendChild(croce);
         campo.insertAdjacentElement("afterend", pulisci);
 
         // Compare solo quando c'è qualcosa da cancellare.
@@ -620,15 +699,22 @@
                 <span class="lightbox-comandi">
                     <button type="button" data-lightbox-prev>← Precedente</button>
                     <button type="button" data-lightbox-next>Successiva →</button>
-                    <button type="button" data-lightbox-chiudi>Chiudi ✕</button>
+                    <button type="button" data-lightbox-chiudi>Chiudi<span class="icona-croce" aria-hidden="true"></span></button>
                 </span>
             </div>
-            <figure class="lightbox-figura"><img alt=""></figure>
+            <figure class="lightbox-figura" data-scheletro><img alt=""></figure>
             <div class="lightbox-didascalia">
                 <p></p>
                 <small></small>
             </div>`;
         document.body.appendChild(scatola);
+
+        /* L'immagine grande arriva in ritardo la prima volta: il segnaposto
+           del riquadro si spegne quando è qui, e l'entrata è misurata una
+           volta sola per il riquadro, non a ogni cambio di tavola. */
+        const imgTavola = q("img", scatola);
+        imgTavola.addEventListener("load", () => immagineArrivata(imgTavola, "pronta"));
+        imgTavola.addEventListener("error", () => immagineArrivata(imgTavola, "errore"));
 
         q("[data-lightbox-prev]", scatola).addEventListener("click", () => vai(-1));
         q("[data-lightbox-next]", scatola).addEventListener("click", () => vai(1));
@@ -669,6 +755,15 @@
         indiceTavola = (i + tavole.length) % tavole.length;
         const tavola = tavole[indiceTavola];
         const img = q("img", lightbox);
+        const origine = q("img", tavola.elemento);
+        /* Le misure della miniatura valgono anche per la tavola grande: il
+           posto è già quello giusto e la cornice non salta quando il file
+           arriva. */
+        for (const misura of ["width", "height"]) {
+            const valore = origine?.getAttribute(misura);
+            if (valore) img.setAttribute(misura, valore);
+        }
+        img.closest("[data-scheletro]")?.removeAttribute("data-pronta");
         img.src = tavola.src;
         img.alt = tavola.alt;
         q(".lightbox-didascalia p", lightbox).textContent = tavola.didascalia;
@@ -747,7 +842,7 @@
                 <div class="aiuto-scheda">
                     <h2 id="aiuto-titolo">Scorciatoie da tastiera</h2>
                     <dl>${voci}</dl>
-                    <button type="button" data-aiuto-chiudi>Chiudi ✕</button>
+                    <button type="button" data-aiuto-chiudi>Chiudi<span class="icona-croce" aria-hidden="true"></span></button>
                 </div>`;
             document.body.appendChild(aiuto);
             aiuto.addEventListener("click", (evento) => {

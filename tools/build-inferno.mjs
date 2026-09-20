@@ -445,9 +445,10 @@ function rendiTavola(canto, tavola) {
   const collegamento =
     tavola.verso === null
       ? ""
-      : `\n          <a class="tavola-rimando" data-vai-a-verso="c${tavola.canto}v${tavola.terzina}" href="#c${tavola.canto}v${tavola.terzina}">Leggi la terzina →</a>`;    const misure = tavola.misure || { larghezza: 960, altezza: 1200 };
-    return `        <figure class="tavola da-comparire">
-          <button type="button" class="tavola-immagine" data-tavola
+      : `\n          <a class="tavola-rimando" data-vai-a-verso="c${tavola.canto}v${tavola.terzina}" href="#c${tavola.canto}v${tavola.terzina}">Leggi la terzina →</a>`;
+  const misure = tavola.misure || { larghezza: 960, altezza: 1200 };
+  return `        <figure class="tavola da-comparire">
+          <button type="button" class="tavola-immagine" data-scheletro data-tavola
                   data-didascalia="${esc(tavola.didascalia)}"
                   data-versi="${esc(versi)}"
                   data-credito="${esc(credito)}">
@@ -844,7 +845,7 @@ ${selettore}
 
 <main>
 
-    <section class="copertina">
+    <section class="copertina" data-scheletro>
         <img class="copertina-sfondo" src="${copertinaFile}" alt="" aria-hidden="true"
              width="${copertina.larghezza}" height="${copertina.altezza}" decoding="async" fetchpriority="high">
         <div class="container copertina-interna">
@@ -915,7 +916,7 @@ ${articoli}
     </div>
 </footer>
 
-<button type="button" class="torna-su" aria-label="Torna all'inizio della pagina" title="Torna su">↑</button>
+<button type="button" class="torna-su" aria-label="Torna all'inizio della pagina" title="Torna su"><span class="icona-freccia-su" aria-hidden="true"></span></button>
 
 <script src="assets/site.js?v=${VERSIONE}"></script>
 </body>
