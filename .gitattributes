@@ -1,0 +1,20 @@
+# Righe e file binari.
+#
+# Il sito è pieno di caratteri tipografici (accenti, virgolette caporali,
+# trattini lunghi) e di versi che finiscono con l'apostrofo: perché i file si
+# leggano uguali su Windows, macOS e Linux, il testo viaggia con fini di riga
+# LF e i binari non vengono mai convertiti né ridotti a diff.
+* text=auto eol=lf
+
+*.jpg binary
+*.png binary
+*.ico binary
+
+# Le pagine generate conservano il testo così com'è: senza questo, il diff di
+# una rigenerazione mostrerebbe tutta la pagina cambiata.
+*.html text
+*.css text
+*.js text
+*.mjs text
+*.json text
+*.md text

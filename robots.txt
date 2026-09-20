@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://broctrl.github.io/dansdantis/sitemap.xml

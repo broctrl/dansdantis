@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it" data-tema="notte">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La pagina cercata non esiste. Da qui si torna alla copertina o al testo integrale dei trentaquattro canti dell'Inferno di Dante.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#100e0d">
+    <meta name="color-scheme" content="dark light">
+    <title>Pagina non trovata — Esplorando l'Inferno di Dante</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="mask-icon" href="assets/favicon.svg" color="#e2542c">
+    <script>
+        /* Il tema scelto è applicato prima del primo disegno: senza questo
+           script la pagina comparirebbe notturna e poi cambierebbe tinta. */
+        (function () {
+            try {
+                var tema = localStorage.getItem("inferno-tema");
+                if (tema === "chiaro" || tema === "notte") {
+                    document.documentElement.dataset.tema = tema;
+                }
+            } catch (e) { /* memoria locale negata: resta il tema predefinito */ }
+        })();
+    </script>
+    <link rel="stylesheet" href="assets/site.css?v=5fa249b3">
+</head>
+<body>
+
+<div id="progresso" aria-hidden="true"></div>
+<a class="salta-al-contenuto" href="#contenuto">Salta al contenuto</a>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <span class="logo-fiamma" aria-hidden="true"></span>
+            <span class="logo-lungo">Esplorando l'</span><strong>Inferno</strong> di Dante
+        </a>
+        <nav aria-label="Navigazione principale">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="inferno.html">Testo integrale</a></li>
+                <li><a href="index.html#struttura">I nove cerchi</a></li>
+            </ul>
+        </nav>
+        <div class="comandi">
+            <button type="button" class="controllo" data-azione="tema" aria-pressed="false">
+                <span class="icona-tema icona-sole" aria-hidden="true"></span>
+                <span class="icona-tema icona-luna" aria-hidden="true"></span>
+                <span data-etichetta-tema>Pergamena</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main id="contenuto">
+
+    <section class="sezione sezione-404">
+        <div class="container">
+            <div class="sezione-testa">
+                <p class="occhiello">Errore 404</p>
+                <h1>Qui non c'è nessun cerchio</h1>
+                <p class="sezione-sommario">
+                    L'indirizzo che hai seguito non porta da nessuna parte: la pagina può essere stata
+                    spostata, rinominata, oppure non è mai esistita. Il testo dei trentaquattro canti è
+                    qui accanto, con l'indice ricercabile e le tavole di Doré.
+                </p>
+            </div>
+            <div class="azioni">
+                <a class="btn btn-primo" href="index.html">Torna alla copertina →</a>
+                <a class="btn btn-secondo" href="inferno.html">Leggi il testo integrale</a>
+            </div>
+            <p class="copertina-nota">
+                <em>Lasciate ogne speranza, voi ch'intrate</em> — ma vale solo per questo indirizzo.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-interno">
+        <p><strong>Esplorando l'Inferno di Dante</strong> — testo integrale della prima cantica.</p>
+        <p class="footer-fonte">
+            Testo di Dante Alighieri, pubblico dominio (XIV secolo), trascritto da Wikisource.
+            Incisioni di Gustave Doré (1832–1883), edizioni Hachette 1861 e Cassell 1892 — pubblico
+            dominio, da Wikimedia Commons.
+        </p>
+    </div>
+</footer>
+
+<script src="assets/site.js?v=5fa249b3"></script>
+</body>
+</html>

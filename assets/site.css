@@ -1,0 +1,1942 @@
+/* ==========================================================================
+   Esplorando l'Inferno di Dante — foglio di stile condiviso
+   Tema notturno (predefinito) e tema pergamena, attivabile dall'utente.
+   ========================================================================== */
+
+:root {
+    --bg: #100e0d;
+    --bg-2: #17130f;
+    --surface: #201a16;
+    --surface-2: #2a221c;
+    --border: #3a2e26;
+    --border-forte: #55402f;
+    --text: #ece3d7;
+    --muted: #a99884;
+    --accent: #e2542c;
+    --accent-scuro: #b23a18;
+    /* Due varianti dello stesso arancione, per i due mestieri che l'accento
+       deve fare: stare sopra il fondo come testo leggibile, oppure fare da
+       fondo a un testo bianco. L'arancione pieno non regge in nessuno dei
+       due casi (4,1 e 3,8 di contrasto): con queste due si sta sopra il 4,5
+       richiesto dalle linee guida. */
+    --accent-testo: #ee6438;
+    --accent-pieno: #c8451d;
+    --oro: #f0b661;
+    /* L'alone in fondo all'imbuto: sul fondo notturno è luce, su quello
+       chiaro sarebbe una macchia, quindi lì si spegne quasi del tutto. */
+    --alone: color-mix(in srgb, var(--accent) 42%, transparent);
+    --ombra: 0 18px 40px -24px rgba(0, 0, 0, 0.9);
+    /* Poco seppia e un filo di contrasto: le incisioni restano leggibili
+       senza il velo che prima impastava i mezzi toni. */
+    --tavola-filtro: sepia(0.08) contrast(1.09) brightness(1.02);
+    /* Le icone sono sagome ritagliate da un tracciato, non emoji: l'emoji la
+       disegna il sistema operativo (forma e colori diversi su ogni macchina,
+       e sempre a colori) e non seguirebbe il tema. Così invece prendono il
+       colore che si dà loro e sono identiche ovunque. */
+    --icona-fiamma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 20'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M8 .6C9.5 4.3 12.2 6.1 13.6 9c1 2 1.6 3 1.6 3.4a7.2 7.2 0 0 1-14.4 0c0-.4.6-1.4 1.6-3.4C3.8 6.1 6.5 4.3 8 .6ZM8 9.6c1 2.4 2.4 3.4 2.4 5.8a2.4 2.4 0 0 1-4.8 0c0-2.4 1.4-3.4 2.4-5.8Z'/%3E%3C/svg%3E");
+    --icona-sole: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='3.3' fill='%23000'/%3E%3Cpath fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' d='M8 .9v1.7M8 13.4v1.7M.9 8h1.7M13.4 8h1.7M3.1 3.1l1.2 1.2M11.7 11.7l1.2 1.2M3.1 12.9l1.2-1.2M11.7 4.3l1.2-1.2'/%3E%3C/svg%3E");
+    --icona-luna: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M9.4 1a6.5 6.5 0 1 0 5.6 9.9A5.2 5.2 0 0 1 9.4 1Z'/%3E%3C/svg%3E");
+    --raggio: 14px;
+    --larghezza: 1160px;
+    --colonna-testo: 38rem;
+    color-scheme: dark;
+}
+
+html[data-tema="chiaro"] {
+    --bg: #f3ece0;
+    --bg-2: #eae0d0;
+    --surface: #fbf6ec;
+    --surface-2: #f0e7d7;
+    --border: #d8c8ae;
+    --border-forte: #bda684;
+    --text: #2a2018;
+    --muted: #6f604d;
+    --accent: #a8340f;
+    --accent-scuro: #7f250a;
+    --accent-testo: #a8340f;
+    --accent-pieno: #a8340f;
+    --oro: #8a5a14;
+    --alone: color-mix(in srgb, var(--accent) 14%, transparent);
+    --ombra: 0 16px 36px -26px rgba(70, 45, 20, 0.65);
+    --tavola-filtro: sepia(0.16) contrast(1.04) brightness(1.01);
+    color-scheme: light;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Le classi con "display" proprio (pastiglie, voci dell'indice) vincerebbero
+   sull'attributo [hidden]: questa regola tiene in piedi la convenzione. */
+[hidden] {
+    display: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Sui dispositivi a tocco il browser disegna un rettangolo di
+       evidenziazione attorno all'elemento toccato: sul tema scuro stona. */
+    -webkit-tap-highlight-color: transparent;
+}
+
+* {
+    scrollbar-color: var(--border-forte) transparent;
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-forte);
+    border: 2px solid transparent;
+    background-clip: content-box;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
+}
+
+body {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+    line-height: 1.75;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--oro);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+a:hover {
+    color: var(--accent-testo);
+}
+
+h1, h2, h3, h4 {
+    font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    line-height: 1.2;
+    font-weight: 600;
+    text-wrap: balance;
+}
+
+:focus-visible {
+    outline: 2px solid var(--oro);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Il contorno di fuoco serve a chi naviga da tastiera. Dopo un clic col mouse
+   il browser lo disegnerebbe comunque attorno ad alcuni elementi (il livello
+   toccato sull'imbuto, il pulsante di una tavola quando il fuoco ci ritorna):
+   qui si spegne, lasciando il posto agli indicatori propri di ciascuno. */
+html[data-input="puntatore"] :focus-visible:not(input, textarea) {
+    outline: none;
+}
+
+::selection {
+    background: var(--accent-pieno);
+    color: #fff;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--larghezza);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+}
+
+.salta-al-contenuto {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    background: var(--accent-pieno);
+    color: #fff;
+    padding: 0.6rem 1rem;
+}
+
+.salta-al-contenuto:focus {
+    left: 0.5rem;
+    top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Barra di avanzamento e testata
+   -------------------------------------------------------------------------- */
+
+#progresso {
+    position: fixed;
+    inset: 0 auto auto 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent-scuro), var(--accent), var(--oro));
+    z-index: 60;
+    transition: width 0.1s linear;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.2);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1.5rem;
+    flex-wrap: wrap;
+    padding-block: 0.7rem;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.12rem;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.logo-lungo {
+    white-space: nowrap;
+}
+
+/* La fiamma del marchio: una sagoma riempita con l'accento, così regge su
+   entrambi i temi. La misura è fissata qui e non dipende dal carattere. */
+.logo-fiamma {
+    display: inline-block;
+    flex: none;
+    align-self: center;
+    width: 11px;
+    height: 16px;
+    background: var(--accent);
+    -webkit-mask: var(--icona-fiamma) center / contain no-repeat;
+    mask: var(--icona-fiamma) center / contain no-repeat;
+    transition: background-color 0.2s ease;
+}
+
+.logo:hover .logo-fiamma {
+    background: var(--oro);
+}
+
+.logo strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.logo:hover {
+    color: var(--text);
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 1.1rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.94rem;
+    padding-block: 0.2rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current] {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Comandi (tema, ricerca, salto al canto)
+   -------------------------------------------------------------------------- */
+
+.comandi {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.controllo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    font: inherit;
+    font-size: 0.88rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.controllo:hover {
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+input.controllo {
+    cursor: text;
+    flex: 1 1 15rem;
+    min-width: 12rem;
+}
+
+/* Il pulsante del tema mostra il tempo che troverai, non quello che c'è: da
+   notte si vede il sole, di giorno la luna. Una sola coppia di icone, e la
+   scelta la fa il tema stesso, senza che il copione debba toccarla. */
+.icona-tema {
+    display: inline-block;
+    flex: none;
+    width: 13px;
+    height: 13px;
+    background: currentColor;
+    -webkit-mask: var(--icona-sole) center / contain no-repeat;
+    mask: var(--icona-sole) center / contain no-repeat;
+}
+
+.icona-tema.icona-luna {
+    -webkit-mask-image: var(--icona-luna);
+    mask-image: var(--icona-luna);
+}
+
+html[data-tema="notte"] .icona-luna,
+html[data-tema="chiaro"] .icona-sole {
+    display: none;
+}
+
+input.controllo::placeholder {
+    color: var(--muted);
+}
+
+/* Il pulsante nativo di cancellazione di <input type="search"> è disegnato dal
+   sistema e stona con il tema: lo si spegne e al suo posto ne compare uno
+   nostro, creato dal copione accanto a ogni campo di ricerca. */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    appearance: none;
+}
+
+.ricerca-pulisci {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.ricerca-pulisci:hover {
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Menu dei canti della testata
+   Un pannello in pagina al posto del <select> nativo, che ignora il tema.
+   -------------------------------------------------------------------------- */
+
+.selettore {
+    position: relative;
+}
+
+.selettore-bottone {
+    max-width: 100%;
+}
+
+/* Il libretto disegnato in casa al posto dell'emoji: quello vero portava nel
+   menu l'unico azzurro del sito e stonava con la pergamena. */
+.selettore-icona {
+    display: inline-flex;
+    flex: none;
+    color: var(--oro);
+}
+
+.selettore-icona svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.1;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.selettore-etichetta {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 10rem;
+}
+
+.selettore-freccia {
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-left: 0.1rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+.selettore-bottone[aria-expanded="true"] .selettore-freccia {
+    transform: rotate(-135deg) translateY(-2px);
+}
+
+.selettore-pannello {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 70;
+    width: min(23rem, calc(100vw - 2rem));
+    padding: 0.7rem;
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    backdrop-filter: blur(12px) saturate(1.2);
+    border: 1px solid var(--border-forte);
+    border-radius: var(--raggio);
+    box-shadow: var(--ombra);
+}
+
+.selettore-filtro {
+    width: 100%;
+    /* Lo spazio a destra è per il pulsante di cancellazione. */
+    padding: 0.45rem 2.2rem 0.45rem 0.7rem;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.selettore-filtro::placeholder {
+    color: var(--muted);
+}
+
+/* Il campo prende il fuoco appena si apre il pannello: qui il contorno della
+   casa basta e avanza, senza aggiungere l'anello esterno. */
+.selettore-filtro:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* Qui il campo è largo quanto il pannello: il pulsante gli sta dentro. */
+.selettore-pannello .ricerca-pulisci {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: 0.7rem;
+}
+
+.selettore-elenco {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.55rem;
+    max-height: min(58vh, 21rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-forte) transparent;
+}
+
+.selettore-gruppo {
+    display: grid;
+    gap: 2px;
+}
+
+/* Il luogo del canto resta in vista mentre si scorre l'elenco: a che punto
+   della discesa si è lo si sa sempre. */
+.selettore-gruppo-titolo {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 0.25rem 0.55rem 0.2rem;
+    color: var(--oro);
+    background: var(--surface);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.selettore-voce {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.4rem 0.55rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.selettore-voce:hover,
+.selettore-voce:focus-visible {
+    color: var(--text);
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.selettore-voce[aria-current="true"] {
+    color: var(--text);
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.selettore-numero {
+    flex: none;
+    min-width: 2.1rem;
+    color: var(--accent-testo);
+    font-weight: 700;
+}
+
+.selettore-incipit {
+    font-style: italic;
+}
+
+.selettore-vuoto {
+    margin-top: 0.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.esito-ricerca {
+    border-style: dashed;
+    cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Copertina
+   -------------------------------------------------------------------------- */
+
+.copertina {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: min(88vh, 46rem);
+    padding-block: clamp(3.5rem, 8vw, 7rem);
+    overflow: hidden;
+    text-align: center;
+    isolation: isolate;
+}
+
+/* L'illustrazione di sfondo è un <img> e non una background-image: così il
+   percorso resta relativo al documento e non al foglio di stile. */
+.copertina-sfondo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    filter: grayscale(0.1) sepia(0.12) contrast(1.1) brightness(1.06);
+    opacity: 0.82;
+}
+
+/* Sul tema chiaro l'incisione ha bisogno di più corpo, non di meno: qui è
+   stampata su carta, e il velo che la copre deve solo schiarirle il fondo. */
+html[data-tema="chiaro"] .copertina-sfondo {
+    opacity: 0.92;
+    filter: grayscale(0.04) sepia(0.22) contrast(1.1) brightness(1.1);
+}
+
+.copertina::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    /* Il tepore dell'Inferno sale dal basso, ma si spegne prima dell'orlo:
+       se toccasse il bordo inferiore, scorrendo resterebbe una striscia
+       arancione appesa sotto la testata. */
+    background:
+        radial-gradient(ellipse 62% 30% at 50% 72%, color-mix(in srgb, var(--accent) 30%, transparent), transparent),
+        linear-gradient(180deg, color-mix(in srgb, var(--bg) 62%, transparent) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 45%, var(--bg) 100%);
+}
+
+html[data-tema="chiaro"] .copertina::after {
+    background:
+        radial-gradient(ellipse 62% 30% at 50% 72%, color-mix(in srgb, var(--accent) 18%, transparent), transparent),
+        linear-gradient(180deg, color-mix(in srgb, var(--bg) 62%, transparent) 0%, color-mix(in srgb, var(--bg) 76%, transparent) 52%, var(--bg) 100%);
+}
+
+.copertina-interna {
+    max-width: 46rem;
+    margin-inline: auto;
+}
+
+.occhiello {
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.76rem;
+    color: var(--oro);
+    margin-bottom: 1.1rem;
+}
+
+.copertina h1 {
+    font-size: clamp(2.1rem, 1.2rem + 4.4vw, 4rem);
+    line-height: 1.08;
+    margin-bottom: 1.1rem;
+}
+
+.copertina h1 em {
+    display: block;
+    font-style: italic;
+    color: var(--accent);
+}
+
+.copertina-sommario {
+    color: var(--muted);
+    font-size: 1.08rem;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+    max-width: 42rem;
+}
+
+.azioni {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.18s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primo {
+    background: linear-gradient(180deg, var(--accent-pieno), var(--accent-scuro));
+    color: #fff;
+}
+
+.btn-primo:hover {
+    color: #fff;
+    filter: brightness(1.08);
+}
+
+.btn-secondo {
+    background: color-mix(in srgb, var(--surface) 80%, transparent);
+    border-color: var(--border-forte);
+    color: var(--text);
+}
+
+.btn-secondo:hover {
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+.copertina-nota {
+    margin-top: 2.2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Sezioni
+   -------------------------------------------------------------------------- */
+
+.sezione {
+    padding-block: clamp(3rem, 6vw, 5.5rem);
+    scroll-margin-top: 7.5rem;
+}
+
+.sezione-alternata {
+    background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--bg-2) 70%, transparent) 12%, color-mix(in srgb, var(--bg-2) 70%, transparent) 88%, transparent);
+}
+
+.sezione-testa {
+    margin-bottom: 2.2rem;
+    max-width: 62ch;
+}
+
+.sezione-testa h2 {
+    font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem);
+    color: var(--oro);
+    margin-bottom: 0.8rem;
+}
+
+.sezione-testa h2::after {
+    content: "";
+    display: block;
+    width: 4.5rem;
+    height: 3px;
+    margin-top: 0.9rem;
+    background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.sezione-sommario {
+    color: var(--muted);
+    font-size: 1.02rem;
+    max-width: 60ch;
+}
+
+/* La pagina di errore è breve: si centra nello schermo invece di lasciare
+   mezzo schermo vuoto sotto le righe. */
+.sezione-404 {
+    display: grid;
+    align-content: center;
+    min-height: min(74vh, 38rem);
+}
+
+.sezione-404 h1 {
+    font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem);
+    color: var(--oro);
+    margin-bottom: 0.8rem;
+    max-width: 24ch;
+}
+
+.prosa > p {
+    margin-bottom: 1.05rem;
+    max-width: 68ch;
+}
+
+.prosa > p:first-of-type::first-letter {
+    float: left;
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 3.4rem;
+    line-height: 0.82;
+    padding: 0.15rem 0.6rem 0 0;
+    color: var(--accent);
+}
+
+.citazione {
+    margin: 1.5rem 0;
+    padding: 1.1rem 0 1.1rem 1.4rem;
+    border-left: 3px solid var(--accent);
+    font-style: italic;
+    font-size: 1.14rem;
+    max-width: 46ch;
+}
+
+.citazione cite {
+    display: block;
+    margin-top: 0.7rem;
+    font-style: normal;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+
+.avviso {
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--oro);
+    border-radius: 0 var(--raggio) var(--raggio) 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Tavole di Doré
+   -------------------------------------------------------------------------- */
+
+.tavole {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: clamp(1rem, 2vw, 1.8rem);
+    margin-top: 1.5rem;
+}
+
+.tavola {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tavola-immagine {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--raggio);
+    overflow: hidden;
+    cursor: zoom-in;
+    box-shadow: var(--ombra);
+}
+
+/* Le incisioni si mostrano per intero: nessun ritaglio, solo la cornice. */
+.tavola-immagine img {
+    width: 100%;
+    height: auto;
+    filter: var(--tavola-filtro);
+    transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.tavola-immagine:hover img,
+.tavola-immagine:focus-visible img {
+    transform: scale(1.035);
+    filter: sepia(0.1) contrast(1.08) brightness(1);
+}
+
+.tavola-immagine::after {
+    content: "⤢";
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    color: var(--oro);
+    font-size: 0.95rem;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.tavola-immagine:hover::after,
+.tavola-immagine:focus-visible::after {
+    opacity: 1;
+}
+
+.tavola figcaption {
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+.tavola figcaption strong {
+    display: block;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.tavola-versi {
+    display: block;
+    margin-top: 0.5rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--border-forte);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.tavola-versi span {
+    display: block;
+}
+
+.tavola-rimando {
+    display: inline-block;
+    margin-top: 0.55rem;
+    font-size: 0.85rem;
+    font-style: normal;
+}
+
+.tavola-in-evidenza {
+    grid-column: 1 / -1;
+}
+
+.tavola-in-evidenza .tavola-immagine {
+    max-width: 44rem;
+    margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Mappa interattiva dei nove cerchi
+   -------------------------------------------------------------------------- */
+
+.mappa {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.mappa-disegno {
+    position: relative;
+}
+
+.mappa-disegno svg {
+    display: block;
+    width: 100%;
+    max-width: 24rem;
+    margin-inline: auto;
+    height: auto;
+    overflow: visible;
+}
+
+.cerchio {
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+    /* Niente rettangolo attorno all'area del livello: l'indicatore è il
+       trapezio stesso. */
+    outline: none;
+}
+
+/* Ogni livello dell'imbuto è un trapezio: si può toccare in tutta la sua
+   superficie, non solo sul contorno come facevano i vecchi anelli. */
+.anello {
+    /* Ogni livello pesca la sua parte di un'unica sfumatura, che va dal tepore
+       della superficie al gelo del fondo. */
+    fill: url(#imbuto-cupo);
+    stroke: var(--border-forte);
+    stroke-width: 1;
+    pointer-events: fill;
+    transition: stroke 0.25s ease;
+}
+
+.imbuto-alto {
+    stop-color: color-mix(in srgb, var(--surface-2) 78%, var(--oro));
+}
+
+.imbuto-fondo {
+    stop-color: color-mix(in srgb, var(--bg) 82%, #24405a);
+}
+
+/* L'alone in fondo all'imbuto: è Lucifero, ed è la sola luce che resta. */
+.mappa-alone {
+    fill: url(#imbuto-centro);
+    pointer-events: none;
+}
+
+.centro-alto {
+    stop-color: var(--alone);
+}
+
+.centro-fondo {
+    stop-color: transparent;
+}
+
+.cerchio:hover .anello {
+    fill: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    stroke: color-mix(in srgb, var(--accent) 60%, var(--border-forte));
+}
+
+.cerchio[aria-pressed="true"] .anello {
+    fill: color-mix(in srgb, var(--accent) 62%, var(--surface));
+    stroke: var(--accent);
+    stroke-width: 1.4;
+}
+
+/* Il fuoco da tastiera accende il trapezio e non il rettangolo che lo
+   contiene; resta visibile anche quando il livello è già quello scelto.
+   Non serve sapere da dove arriva il comando: :focus-visible non si accende
+   per un clic del mouse. */
+.cerchio:focus-visible .anello {
+    stroke: var(--oro);
+    stroke-width: 2.4;
+}
+
+.cerchio[aria-pressed="true"]:focus-visible .anello {
+    fill: color-mix(in srgb, var(--accent) 40%, var(--surface));
+}
+
+.mappa-numero {
+    fill: var(--text);
+    opacity: 0.62;
+    font-family: "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 9px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.cerchio:hover .mappa-numero {
+    opacity: 1;
+}
+
+.cerchio[aria-pressed="true"] .mappa-numero {
+    fill: #fff;
+    opacity: 1;
+    font-weight: 700;
+}
+
+.mappa-nota {
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+.mappa-centro {
+    fill: var(--accent);
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 80%, transparent));
+}
+
+.mappa-etichetta {
+    fill: var(--muted);
+    font-size: 8.5px;
+    text-anchor: middle;
+    pointer-events: none;
+    letter-spacing: 0.3px;
+}
+
+/* Un cambio di livello si nota: la scheda entra invece di scattare. La classe
+   la mette e la toglie il copione, così non è mai l'animazione a decidere se
+   la scheda si vede. */
+.mappa-scheda.entrata {
+    animation: scheda-entra 0.32s ease;
+}
+
+@keyframes scheda-entra {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+}
+
+.mappa-scheda {
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
+    border: 1px solid var(--border);
+    border-radius: var(--raggio);
+    padding: clamp(1.2rem, 3vw, 2rem);
+    box-shadow: var(--ombra);
+    min-height: 17rem;
+}
+
+.mappa-scheda .scheda-numero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--accent-pieno);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.mappa-scheda h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Compare solo senza copione: la scheda si ferma a numero e nome, e qui si
+   spiega perché invece di lasciare tre righe vuote. */
+.scheda-avviso {
+    margin-top: 0.6rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.mappa-scheda dl {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.mappa-scheda dt {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--oro);
+}
+
+.mappa-scheda dd {
+    color: var(--muted);
+    font-size: 0.96rem;
+}
+
+.mappa-scheda [data-scheda-testo] {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.mappa-scheda [data-scheda-canti] {
+    margin-top: 1.2rem;
+}
+
+.elenco-cerchi {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.4rem;
+    list-style: none;
+}
+
+.elenco-cerchi button {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.8rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.elenco-cerchi button:hover {
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+.elenco-cerchi button[aria-pressed="true"] {
+    color: #fff;
+    background: var(--accent-pieno);
+    border-color: var(--accent-pieno);
+}
+
+/* --------------------------------------------------------------------------
+   Indice dei canti (pagina del testo)
+   -------------------------------------------------------------------------- */
+
+.indice {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: 0.6rem;
+    list-style: none;
+    margin-top: 1.5rem;
+}
+
+.indice a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    height: 100%;
+    padding: 0.7rem 0.9rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--muted);
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.indice a:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.indice a[aria-current="true"] {
+    color: var(--text);
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+}
+
+.indice-numero {
+    flex: none;
+    min-width: 1.9rem;
+    color: var(--accent-testo);
+    font-weight: 700;
+}
+
+.indice-incipit {
+    font-style: italic;
+}
+
+.indice-vuoto {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* Filtri per cerchio, accanto al campo di ricerca */
+.indice-filtri {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.9rem 0 0.2rem;
+    list-style: none;
+}
+
+.indice-filtri button {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 0.3rem 0.75rem;
+    color: var(--muted);
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.indice-filtri button:hover {
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+.indice-filtri button[aria-pressed="true"] {
+    color: #fff;
+    background: linear-gradient(180deg, var(--accent-pieno), var(--accent-scuro));
+    border-color: var(--accent-pieno);
+}
+
+/* --------------------------------------------------------------------------
+   Canti
+   -------------------------------------------------------------------------- */
+
+.canto {
+    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    border-top: 1px solid var(--border);
+    scroll-margin-top: 7.5rem;
+}
+
+.canto-testa {
+    display: grid;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+}
+
+.canto-luogo {
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    font-size: 0.76rem;
+    color: var(--oro);
+}
+
+.canto h2 {
+    font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem);
+    color: var(--text);
+}
+
+/* Il verso d'apertura fa da sottotitolo: dà un nome al canto senza ripetere
+   il numero già scritto sopra. */
+.canto h2 em {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.46em;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--muted);
+    max-width: 46ch;
+}
+
+.canto-bolli {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    list-style: none;
+}
+
+.bollo {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-forte);
+    color: var(--muted);
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+
+.argomento {
+    max-width: 62ch;
+    color: var(--muted);
+    font-style: italic;
+    border-left: 3px solid var(--accent);
+    padding-left: 1.1rem;
+}
+
+.canto-corpo {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    grid-template-columns: minmax(0, var(--colonna-testo)) minmax(0, 1fr);
+    align-items: start;
+}
+
+.versi {
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.terzina {
+    position: relative;
+    margin-bottom: 1.05rem;
+    padding: 0.15rem 0.5rem 0.15rem 0.6rem;
+    border-left: 2px solid transparent;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.terzina:hover,
+.terzina:focus-within {
+    background: color-mix(in srgb, var(--surface) 75%, transparent);
+    border-left-color: var(--border-forte);
+}
+
+.terzina.attiva {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    border-left-color: var(--accent);
+}
+
+.v {
+    display: block;
+}
+
+.vnum {
+    float: right;
+    padding-left: 1rem;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.75;
+}
+
+.canto-colonna {
+    display: grid;
+    gap: 1.75rem;
+    align-content: start;
+}
+
+/* --------------------------------------------------------------------------
+   Navigazione fra i canti
+   -------------------------------------------------------------------------- */
+
+.canto-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+}
+
+.canto-nav a {
+    text-decoration: none;
+}
+
+.canto-nav a:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Binario di salto rapido fra i canti
+   Una pallina per canto, sul fianco dello schermo: per 4.720 versi è il modo
+   più rapido per spostarsi. Compare solo dove c'è spazio per non coprire il
+   testo, e mai sulle stampe.
+   -------------------------------------------------------------------------- */
+
+.binario {
+    display: none;
+}
+
+@media (min-width: 1180px) and (min-height: 700px) {
+    .binario {
+        position: fixed;
+        right: 0.4rem;
+        top: 50%;
+        z-index: 40;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 0.7rem 0.45rem;
+        background: color-mix(in srgb, var(--surface) 70%, transparent);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        transform: translateY(-50%);
+    }
+}
+
+.binario a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.binario a::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--border-forte);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.binario a span {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    padding: 0.2rem 0.55rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border-forte);
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 0.72rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(0.35rem);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.binario a:hover::before,
+.binario a:focus-visible::before {
+    background: var(--accent);
+    transform: scale(1.4);
+}
+
+.binario a:hover span,
+.binario a:focus-visible span {
+    opacity: 1;
+    transform: translateY(-50%);
+}
+
+.binario a[aria-current="page"]::before {
+    background: var(--accent);
+    transform: scale(1.6);
+}
+
+.binario a[aria-current="page"] span {
+    opacity: 1;
+    transform: translateY(-50%);
+}
+
+/* --------------------------------------------------------------------------
+   Lightbox
+   -------------------------------------------------------------------------- */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: none;
+    grid-template-rows: auto 1fr auto;
+    background: color-mix(in srgb, #070605 94%, transparent);
+    backdrop-filter: blur(6px);
+}
+
+.lightbox[data-aperto="true"] {
+    display: grid;
+}
+
+.lightbox-testa {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    padding: 0.9rem clamp(1rem, 3vw, 2rem);
+    color: #e9dfd2;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 560px) {
+    /* Contatore e tre pulsanti non stanno su una riga sola. */
+    .lightbox-testa {
+        justify-content: center;
+    }
+}
+
+.lightbox-contatore {
+    color: #b9a894;
+    font-variant-numeric: tabular-nums;
+}
+
+.lightbox-figura {
+    display: grid;
+    place-items: center;
+    padding: 0 clamp(0.75rem, 3vw, 3rem);
+    min-height: 0;
+}
+
+.lightbox-figura img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 1px solid #3a2e26;
+    border-radius: 6px;
+    box-shadow: 0 30px 80px -30px #000;
+}
+
+/* Con un riquadro modale aperto la pagina di fondo non scorre. */
+body.modale-aperto {
+    overflow: hidden;
+}
+
+.lightbox-didascalia {
+    padding: 1rem clamp(1rem, 3vw, 2rem) 1.5rem;
+    text-align: center;
+    color: #e9dfd2;
+    max-width: 60rem;
+    margin-inline: auto;
+}
+
+.lightbox-didascalia p {
+    font-style: italic;
+    font-size: 0.98rem;
+}
+
+.lightbox-didascalia small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #a99884;
+    font-style: normal;
+}
+
+.lightbox-comandi {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.lightbox button {
+    font: inherit;
+    font-size: 0.9rem;
+    color: #e9dfd2;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid #4a3a2e;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.lightbox button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: var(--accent);
+}
+
+.lightbox button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+/* Pannello delle scorciatoie: riusa la tendina del lightbox. */
+.lightbox.aiuto {
+    grid-template-rows: none;
+    place-items: center;
+    padding: 1.5rem;
+}
+
+.aiuto-scheda {
+    width: min(100%, 26rem);
+    padding: clamp(1.4rem, 4vw, 2.2rem);
+    background: color-mix(in srgb, var(--surface) 94%, transparent);
+    border: 1px solid var(--border-forte);
+    border-radius: var(--raggio);
+    box-shadow: 0 30px 80px -30px #000;
+    color: var(--text);
+}
+
+.aiuto-scheda h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.1rem;
+}
+
+.aiuto-scheda dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.6rem 1rem;
+    align-items: baseline;
+    margin-bottom: 1.4rem;
+}
+
+.aiuto-scheda dt {
+    text-align: right;
+}
+
+.aiuto-scheda dd {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.aiuto-scheda kbd {
+    display: inline-block;
+    min-width: 1.6rem;
+    padding: 0.15rem 0.5rem;
+    font-family: inherit;
+    font-size: 0.85rem;
+    text-align: center;
+    color: var(--oro);
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    border: 1px solid var(--border-forte);
+    border-radius: 6px;
+    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--border-forte) 60%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   Avviso copia citazione e pulsante di risalita
+   -------------------------------------------------------------------------- */
+
+.brindisi {
+    position: fixed;
+    left: 50%;
+    bottom: 1.6rem;
+    z-index: 90;
+    transform: translate(-50%, 1.5rem);
+    /* Una citazione copiata può essere lunga: senza limite deborderebbe. */
+    max-width: min(92vw, 34rem);
+    text-align: center;
+    padding: 0.7rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    box-shadow: var(--ombra);
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.brindisi[data-visibile="true"] {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.torna-su {
+    position: fixed;
+    right: 1.1rem;
+    bottom: 1.1rem;
+    z-index: 55;
+    width: 2.9rem;
+    height: 2.9rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+    color: var(--text);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.6rem);
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s ease;
+}
+
+.torna-su[data-visibile="true"] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+}
+
+.torna-su:hover {
+    border-color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Comparsa graduale
+   -------------------------------------------------------------------------- */
+
+/* Le tavole si vedono di partenza: la dissolvenza si aggiunge quando entrano
+   nello schermo. Se lo script non gira — o il motore di disegno smette di far
+   avanzare le animazioni — al loro posto non resta mai un rettangolo vuoto. */
+
+.da-comparire.comparso {
+    animation: comparsa-scende 0.7s ease;
+}
+
+/* Applicata dallo script a dissolvenza conclusa: da lì in poi non è più
+   l'animazione a stabilire se il contenuto si vede. */
+.da-comparire.tranquillo {
+    animation: none;
+}
+
+@keyframes comparsa-scende {
+    from {
+        opacity: 0;
+        transform: translateY(1.4rem);
+    }
+}
+
+/* «Meno movimento» vale per tutto il sito, non per i componenti che mi sono
+   ricordato di elencare: una regola sola spegne ogni animazione e transizione,
+   comprese quelle che verranno. Restano da neutralizzare i due spostamenti al
+   passaggio del mouse, che senza movimento sarebbero uno scatto. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .btn:hover,
+    .indice a:hover {
+        transform: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Note a piè di pagina
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: 2.5rem;
+    margin-top: 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.footer-interno {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    text-align: center;
+}
+
+.footer-interno a {
+    color: var(--muted);
+}
+
+.footer-fonte {
+    font-size: 0.85rem;
+    max-width: 70ch;
+}
+
+/* --------------------------------------------------------------------------
+   Adattamento agli schermi stretti
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 960px) {
+    .canto-corpo {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .canto-colonna {
+        order: -1;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    }
+
+    .mappa {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 860px) {
+    /* Testata su due righe: logo e comandi in alto, navigazione sotto. */
+    .header-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.5rem 1rem;
+    }
+
+    .header-inner nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .nav-links {
+        gap: 0.3rem 0.9rem;
+        font-size: 0.88rem;
+    }
+
+    .comandi {
+        gap: 0.4rem;
+    }
+
+    .selettore {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .selettore-etichetta {
+        max-width: 7rem;
+    }
+}
+
+@media (max-width: 720px) {
+    /* Su schermo stretto il titolo si accorcia, per non toccare i comandi. */
+    .logo-lungo {
+        display: none;
+    }
+
+    .copertina {
+        min-height: auto;
+        padding-block: 3.5rem 4rem;
+    }
+
+    .canto-nav {
+        justify-content: flex-start;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Stampa
+   Un poema si stampa, e chi lo stampa vuole i versi: qui resta solo quello
+   che ha senso sulla carta — niente comandi, niente scorrimenti, niente
+   colori di fondo — con le terzine che non si spezzano fra due pagine e ogni
+   canto che ricomincia in cima alla sua.
+   -------------------------------------------------------------------------- */
+
+@media print {
+    @page {
+        margin: 18mm 16mm;
+    }
+
+    /* Tutto ciò che esiste solo per lo schermo. */
+    .site-header,
+    .salta-al-contenuto,
+    #progresso,
+    .torna-su,
+    .azioni,
+    .binario,
+    .canto-colonna,
+    .canto-nav,
+    .lightbox,
+    .brindisi,
+    .comandi,
+    .indice-filtri,
+    .sezione-sommario,
+    .avviso,
+    .copertina-sfondo {
+        display: none !important;
+    }
+
+    /* Le incisioni di Doré sono in bianco e nero: sulla carta reggono, ma i
+       fondi no. I colori del testo vanno tutti al nero pieno. */
+    *,
+    ::before,
+    ::after {
+        background: transparent !important;
+        box-shadow: none !important;
+        color: #000 !important;
+    }
+
+    body {
+        background: #fff !important;
+        font-size: 10.5pt;
+        line-height: 1.45;
+    }
+
+    a {
+        color: #000 !important;
+        text-decoration: none;
+    }
+
+    /* Nessun titolo resta solo in fondo alla pagina, e ogni canto comincia
+       su una pagina nuova. */
+    h1,
+    h2,
+    h3 {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    article.canto {
+        break-before: page;
+        page-break-before: always;
+    }
+
+    article.canto:first-of-type {
+        break-before: auto;
+        page-break-before: auto;
+    }
+
+    /* La terzina è l'unità del poema: o sta tutta su una pagina, o passa
+       intera alla successiva. */
+    .terzina {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-bottom: 0.7rem;
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .terzina.attiva {
+        background: transparent !important;
+    }
+
+    .versi {
+        font-size: 10.5pt;
+        line-height: 1.55;
+    }
+
+    /* L'imbuto è disegnato con sfumature che sulla carta diventerebbero due
+       macchie scure, e i numeri dei cerchi sparirebbero dentro di esse. Qui
+       resta il contorno. */
+    .anello,
+    .mappa-centro {
+        fill: #fff !important;
+        stroke: #000 !important;
+    }
+
+    .mappa-alone {
+        display: none;
+    }
+
+    .mappa-numero,
+    .mappa-etichetta,
+    .scheda-numero {
+        fill: #000 !important;
+    }
+
+    /* Le tavole: intere, e non più alte di una pagina. */
+    figure.tavola {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .tavola-immagine {
+        border: 0;
+        padding: 0;
+        cursor: auto;
+    }
+
+    .tavola-immagine img {
+        max-height: 200mm;
+        width: auto;
+    }
+}

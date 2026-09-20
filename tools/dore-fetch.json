@@ -1,0 +1,563 @@
+{
+  "canto-01-1.jpg": {
+    "titolo": "Inferno Canto 1 leopard.jpg",
+    "canto": 1,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_1_leopard.jpg",
+    "miniatura": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Inferno_Canto_1_leopard.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "larg": 1000,
+    "alt": 847,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-01-2.jpg": {
+    "titolo": "Inferno Canto 1 lion.jpg",
+    "canto": 1,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_1_lion.jpg",
+    "largOrigine": 701,
+    "altOrigine": 1081,
+    "artista": "Gustave Doré (illustrator died 1883); Dante Alighieri (writer died 1321); Rev. Henry Francis Cary, M.A. (translator died 1844)",
+    "data": "1892",
+    "licenza": "Public domain"
+  },
+  "canto-02-1.jpg": {
+    "titolo": "Inferno Canto 2 Beatrice bids Virgil on.jpg",
+    "canto": 2,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_2_Beatrice_bids_Virgil_on.jpg",
+    "largOrigine": 704,
+    "altOrigine": 1073,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-04-1.jpg": {
+    "titolo": "Inferno Canto 4 unbaptised lines 38-39.jpg",
+    "canto": 4,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_4_unbaptised_lines_38-39.jpg",
+    "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Inferno_Canto_4_unbaptised_lines_38-39.jpg/960px-Inferno_Canto_4_unbaptised_lines_38-39.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "larg": 960,
+    "alt": 763,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-03-1.jpg": {
+    "titolo": "Inferno Canto 3 line 9.jpg",
+    "canto": 3,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_3_line_9.jpg",
+    "miniatura": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Inferno_Canto_3_line_9.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "larg": 1000,
+    "alt": 781,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-03-2.jpg": {
+    "titolo": "Inferno Canto 3 Charon strikes lines 107-108.jpg",
+    "canto": 3,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_3_Charon_strikes_lines_107-108.jpg",
+    "miniatura": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Inferno_Canto_3_Charon_strikes_lines_107-108.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "larg": 1000,
+    "alt": 809,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-01-3.jpg": {
+    "titolo": "Inferno Canto 1 lines 87-88 Virgil.jpg",
+    "canto": 1,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_1_lines_87-88_Virgil.jpg",
+    "largOrigine": 706,
+    "altOrigine": 1069,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-05-1.jpg": {
+    "titolo": "Inferno Canto 5 line 4 Minos.jpg",
+    "canto": 5,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_5_line_4_Minos.jpg",
+    "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Inferno_Canto_5_line_4_Minos.jpg/960px-Inferno_Canto_5_line_4_Minos.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "larg": 960,
+    "alt": 762,
+    "artista": "Gustave Doré",
+    "data": "1860s",
+    "licenza": "Public domain"
+  },
+  "canto-05-2.jpg": {
+    "titolo": "Inferno Canto 5 lines 32-33.jpg",
+    "canto": 5,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_5_lines_32-33.jpg",
+    "largOrigine": 716,
+    "altOrigine": 1079,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-05-3.jpg": {
+    "titolo": "Inferno Canto 5 lines 134-135.jpg",
+    "canto": 5,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_5_lines_134-135.jpg",
+    "largOrigine": 715,
+    "altOrigine": 1083,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-06-1.jpg": {
+    "titolo": "Inferno Canto 6 lines 24-26.jpg",
+    "canto": 6,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_6_lines_24-26.jpg",
+    "largOrigine": 991,
+    "altOrigine": 802,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-06-2.jpg": {
+    "titolo": "Inferno Canto 6 lines 49-52.jpg",
+    "canto": 6,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_6_lines_49-52.jpg",
+    "largOrigine": 987,
+    "altOrigine": 829,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-07-1.jpg": {
+    "titolo": "Inferno Canto 7 lines 8-9.jpg",
+    "canto": 7,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_7_lines_8-9.jpg",
+    "largOrigine": 995,
+    "altOrigine": 790,
+    "artista": "Gustave Doré",
+    "data": "1883 date QS:P571,+1883-00-00T00:00:00Z/9",
+    "licenza": "Public domain"
+  },
+  "canto-07-2.jpg": {
+    "titolo": "Inferno Canto 7 lines 118-119.jpg",
+    "canto": 7,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_7_lines_118-119.jpg",
+    "largOrigine": 987,
+    "altOrigine": 813,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-08-1.jpg": {
+    "titolo": "Inferno Canto 8 verses 27-29.jpg",
+    "canto": 8,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_8_verses_27-29.jpg",
+    "largOrigine": 980,
+    "altOrigine": 816,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-09-1.jpg": {
+    "titolo": "Inferno Canto 9 verses 87-89.jpg",
+    "canto": 9,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_9_verses_87-89.jpg",
+    "largOrigine": 980,
+    "altOrigine": 816,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-09-2.jpg": {
+    "titolo": "Inferno Canto 9 verses 124-126.jpg",
+    "canto": 9,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_9_verses_124-126.jpg",
+    "largOrigine": 720,
+    "altOrigine": 1101,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-10-1.jpg": {
+    "titolo": "Inferno Canto 10 verses 40-42.jpg",
+    "canto": 10,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_10_verses_40-42.jpg",
+    "largOrigine": 700,
+    "altOrigine": 1121,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-11-1.jpg": {
+    "titolo": "Inferno Canto 11 verses 6-7.jpg",
+    "canto": 11,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_11_verses_6-7.jpg",
+    "largOrigine": 712,
+    "altOrigine": 1082,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-08-2.jpg": {
+    "titolo": "Inferno Canto 8 lines 39-41.jpg",
+    "canto": 8,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_8_lines_39-41.jpg",
+    "largOrigine": 713,
+    "altOrigine": 1103,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-21-2.jpg": {
+    "titolo": "Gustave Dore Inferno Canto 21.jpg",
+    "canto": 21,
+    "commons": "https://commons.wikimedia.org/wiki/File:Gustave_Dore_Inferno_Canto_21.jpg",
+    "largOrigine": 979,
+    "altOrigine": 797,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-12-1.jpg": {
+    "titolo": "Inferno Canto 12 verses 11-14.jpg",
+    "canto": 12,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_12_verses_11-14.jpg",
+    "largOrigine": 715,
+    "altOrigine": 1120,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-12-2.jpg": {
+    "titolo": "Inferno Canto 12 verses 73-74.jpg",
+    "canto": 12,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_12_verses_73-74.jpg",
+    "largOrigine": 987,
+    "altOrigine": 806,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-13-1.jpg": {
+    "titolo": "Inferno Canto 13 verse 34.jpg",
+    "canto": 13,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_13_verse_34.jpg",
+    "largOrigine": 975,
+    "altOrigine": 794,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-13-2.jpg": {
+    "titolo": "Inferno Canto 13 verse 120.jpg",
+    "canto": 13,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_13_verse_120.jpg",
+    "largOrigine": 989,
+    "altOrigine": 788,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-14-1.jpg": {
+    "titolo": "Inferno Canto 14 verses 37-39.jpg",
+    "canto": 14,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_14_verses_37-39.jpg",
+    "largOrigine": 994,
+    "altOrigine": 828,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-15-1.jpg": {
+    "titolo": "Inferno Canto 15 verses 28-29.jpg",
+    "canto": 15,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_15_verses_28-29.jpg",
+    "largOrigine": 986,
+    "altOrigine": 809,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-17-1.jpg": {
+    "titolo": "Inferno Canto 17 verse 7.jpg",
+    "canto": 17,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_17_verse_7.jpg",
+    "largOrigine": 714,
+    "altOrigine": 1062,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-17-2.jpg": {
+    "titolo": "Inferno Canto 17 verse 117.jpg",
+    "canto": 17,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_17_verse_117.jpg",
+    "largOrigine": 708,
+    "altOrigine": 1058,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-18-1.jpg": {
+    "titolo": "Inferno Canto 18 verse 38.jpg",
+    "canto": 18,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_18_verse_38.jpg",
+    "largOrigine": 985,
+    "altOrigine": 786,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-18-2.jpg": {
+    "titolo": "Inferno Canto 18 verses 130-132.jpg",
+    "canto": 18,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_18_verses_130-132.jpg",
+    "largOrigine": 710,
+    "altOrigine": 1082,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-19-1.jpg": {
+    "titolo": "Inferno Canto 19 verses 10-11.jpg",
+    "canto": 19,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_19_verses_10-11.jpg",
+    "largOrigine": 709,
+    "altOrigine": 1098,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-21-1.jpg": {
+    "titolo": "Inferno Canto 21 verses 50-51.jpg",
+    "canto": 21,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_21_verses_50-51.jpg",
+    "largOrigine": 981,
+    "altOrigine": 804,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-22-1.jpg": {
+    "titolo": "Inferno Canto 22 verses 125-126.jpg",
+    "canto": 22,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_22_verses_125-126.jpg",
+    "largOrigine": 984,
+    "altOrigine": 791,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-22-2.jpg": {
+    "titolo": "Inferno Canto 22 verses 137-139.jpg",
+    "canto": 22,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_22_verses_137-139.jpg",
+    "largOrigine": 712,
+    "altOrigine": 1087,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-23-1.jpg": {
+    "titolo": "Inferno Canto 23 verses 52-54.jpg",
+    "canto": 23,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_23_verses_52-54.jpg",
+    "largOrigine": 712,
+    "altOrigine": 1089,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-23-2.jpg": {
+    "titolo": "Inferno Canto 23 verses 117-120.jpg",
+    "canto": 23,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_23_verses_117-120.jpg",
+    "largOrigine": 706,
+    "altOrigine": 1115,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-24-1.jpg": {
+    "titolo": "Inferno Canto 24 verses 89-92.jpg",
+    "canto": 24,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_24_verses_89-92.jpg",
+    "largOrigine": 981,
+    "altOrigine": 834,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain"
+  },
+  "canto-25-1.jpg": {
+    "titolo": "Inferno Canto 25 verses 59-61.jpg",
+    "canto": 25,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_25_verses_59-61.jpg",
+    "largOrigine": 717,
+    "altOrigine": 1091,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain",
+    "larghezza": 640
+  },
+  "canto-26-1.jpg": {
+    "titolo": "Inferno Canto 26 verses 46-49.jpg",
+    "canto": 26,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_26_verses_46-49.jpg",
+    "largOrigine": 708,
+    "altOrigine": 1097,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain",
+    "larghezza": 640
+  },
+  "canto-28-1.jpg": {
+    "titolo": "Inferno Canto 28 verses 69-72.jpg",
+    "canto": 28,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_28_verses_69-72.jpg",
+    "largOrigine": 986,
+    "altOrigine": 840,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-28-2.jpg": {
+    "titolo": "Inferno Canto 28 verses 116-119.jpg",
+    "canto": 28,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_28_verses_116-119.jpg",
+    "largOrigine": 706,
+    "altOrigine": 1092,
+    "artista": "Gustave Doré",
+    "data": "",
+    "licenza": "Public domain",
+    "larghezza": 480
+  },
+  "canto-29-1.jpg": {
+    "titolo": "Inferno Canto 29 verses 52-56.jpg",
+    "canto": 29,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_29_verses_52-56.jpg",
+    "largOrigine": 712,
+    "altOrigine": 1128,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 480
+  },
+  "canto-29-2.jpg": {
+    "titolo": "Inferno Canto 29 verses 79-81.jpg",
+    "canto": 29,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_29_verses_79-81.jpg",
+    "largOrigine": 986,
+    "altOrigine": 812,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-30-1.jpg": {
+    "titolo": "Inferno Canto 30 verses 33-34.jpg",
+    "canto": 30,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_30_verses_33-34.jpg",
+    "largOrigine": 985,
+    "altOrigine": 803,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-30-2.jpg": {
+    "titolo": "Inferno Canto 30 verses 38-39.jpg",
+    "canto": 30,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_30_verses_38-39.jpg",
+    "largOrigine": 705,
+    "altOrigine": 1073,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 480
+  },
+  "canto-31-1.jpg": {
+    "titolo": "Inferno Canto 31 verses 64-66.jpg",
+    "canto": 31,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_31_verses_64-66.jpg",
+    "largOrigine": 704,
+    "altOrigine": 1111,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 480
+  },
+  "canto-31-2.jpg": {
+    "titolo": "Inferno Canto 31 verses 133-135.jpg",
+    "canto": 31,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_31_verses_133-135.jpg",
+    "largOrigine": 704,
+    "altOrigine": 1095,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 480
+  },
+  "canto-32-1.jpg": {
+    "titolo": "Inferno Canto 32 verses 20-22.jpg",
+    "canto": 32,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_32_verses_20-22.jpg",
+    "largOrigine": 981,
+    "altOrigine": 825,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-32-2.jpg": {
+    "titolo": "Inferno Canto 32 verses 127-129.jpg",
+    "canto": 32,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_32_verses_127-129.jpg",
+    "largOrigine": 985,
+    "altOrigine": 824,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-33-1.jpg": {
+    "titolo": "Inferno Canto 33 verses 62-63.jpg",
+    "canto": 33,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_33_verses_62-63.jpg",
+    "largOrigine": 979,
+    "altOrigine": 813,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-33-2.jpg": {
+    "titolo": "Inferno Canto 33 verses 73-74.jpg",
+    "canto": 33,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_33_verses_73-74.jpg",
+    "largOrigine": 980,
+    "altOrigine": 800,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-34-1.jpg": {
+    "titolo": "Inferno Canto 34 verses 20-21.jpg",
+    "canto": 34,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_34_verses_20-21.jpg",
+    "largOrigine": 3307,
+    "altOrigine": 2837,
+    "artista": "Gustave Doré",
+    "data": "1892 date QS:P571,+1892-00-00T00:00:00Z/9",
+    "licenza": "Public domain",
+    "larghezza": 960
+  },
+  "canto-34-2.jpg": {
+    "titolo": "Inferno Canto 34 verses 127-129.jpg",
+    "canto": 34,
+    "commons": "https://commons.wikimedia.org/wiki/File:Inferno_Canto_34_verses_127-129.jpg",
+    "largOrigine": 716,
+    "altOrigine": 1095,
+    "artista": "Gustave Doré",
+    "data": "1892",
+    "licenza": "Public domain",
+    "larghezza": 480
+  }
+}

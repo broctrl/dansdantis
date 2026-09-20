@@ -1,0 +1,12 @@
+# Segnaposto dell'ambiente di sviluppo locale
+.freebuff/
+
+# Rifiuti del sistema operativo e degli editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# File temporanei lasciati a metà da uno scaricamento interrotto
+assets/dore/*.tmp

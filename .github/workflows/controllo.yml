@@ -1,0 +1,44 @@
+name: Controllo del sito
+
+# Una delle tre pagine è generata, due sono scritte a mano, e le une possono
+# scostarsi dalle altre senza che nessuno se ne accorga: è esattamente il
+# lavoro per cui esiste `tools/verifica.mjs`, che esce con codice 1 appena
+# trova un errore. Qui gli si dà un momento in cui farlo valere.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Lettura del deposito e nient'altro: il controllo non scrive sul remoto.
+permissions:
+  contents: read
+
+# Una spinta nuova sulla stessa richiesta annulla la prova precedente.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      # La pagina del testo è generata dai wikitext in `tools/cache`: se quella
+      # versata non corrisponde a ciò che gli script producono oggi, la
+      # modifica è arrivata a metà. Il confronto guarda solo `inferno.html`:
+      # `robots.txt` e `sitemap.xml` portano la data di ciascuna pagina, che su
+      # un deposito appena scaricato è quella del prelievo, non quella vera.
+      - name: Rigenera la pagina del testo
+        run: node tools/build-inferno.mjs
+
+      - name: La pagina versata corrisponde ai testi di partenza
+        run: git diff --exit-code -- inferno.html
+
+      - name: Controllo complessivo
+        run: node tools/verifica.mjs

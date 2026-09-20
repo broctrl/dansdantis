@@ -1,0 +1,4 @@
+{
+  "//": "L'indirizzo pubblico del sito, con la barra finale. È l'unica fonte: canonical, og:url, og:image, robots.txt e sitemap.xml si ricavano da qui. Cambiandolo, rilanciare `node tools/build-inferno.mjs` e allineare a mano l'intestazione di index.html e 404.html (tools/verifica.mjs segnala ciò che resta indietro).",
+  "indirizzo": "https://broctrl.github.io/dansdantis/"
+}

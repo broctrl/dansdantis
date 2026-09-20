@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Inferno">
+  <defs>
+    <linearGradient id="fiamma" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#b23a18"/>
+      <stop offset="0.55" stop-color="#e2542c"/>
+      <stop offset="1" stop-color="#f0b661"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#100e0d"/>
+  <path fill="url(#fiamma)"
+        d="M32 6c1.8 6.6 5.6 9.8 9.4 14.8 3.6 4.7 6 9.2 6 14.6a15.4 15.4 0 0 1-30.8 0c0-5.4 2.4-9.9 6-14.6C26.4 15.8 30.2 12.6 32 6Z"/>
+  <path fill="#100e0d" opacity="0.42"
+        d="M32 27c2.5 3.8 6.3 5.8 6.3 10.6a6.3 6.3 0 0 1-12.6 0C25.7 32.8 29.5 30.8 32 27Z"/>
+</svg>

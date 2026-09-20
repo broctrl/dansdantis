@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="it" data-tema="notte">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Viaggio guidato nell'Inferno della Divina Commedia di Dante Alighieri: la struttura dei nove cerchi, le pene, i dannati più celebri e le tavole incise da Gustave Doré.">
+    <meta name="theme-color" content="#100e0d">
+    <meta name="color-scheme" content="dark light">
+    <title>Esplorando l'Inferno di Dante</title>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:site_name" content="Esplorando l'Inferno di Dante">
+    <meta property="og:title" content="Esplorando l'Inferno di Dante">
+    <meta property="og:description" content="Viaggio guidato nell'Inferno della Divina Commedia: i nove cerchi, le pene, i dannati più celebri e le tavole incise da Gustave Doré.">
+    <meta property="og:image" content="https://broctrl.github.io/dansdantis/assets/dore/canto-01-1.jpg">
+    <meta property="og:image:width" content="977">
+    <meta property="og:image:height" content="828">
+    <meta property="og:image:alt" content="Incisione di Gustave Doré per il canto I dell'Inferno.">
+    <meta property="og:url" content="https://broctrl.github.io/dansdantis/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://broctrl.github.io/dansdantis/">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <!-- iOS non legge le icone vettoriali: qui ne serve una raster. Safari,
+         che le legge, usa la stessa per la scheda fissata. -->
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="mask-icon" href="assets/favicon.svg" color="#e2542c">
+    <script>
+        /* Il tema scelto è applicato prima del primo disegno: senza questo
+           script la pagina comparirebbe notturna e poi cambierebbe tinta. */
+        (function () {
+            try {
+                var tema = localStorage.getItem("inferno-tema");
+                if (tema === "chiaro" || tema === "notte") {
+                    document.documentElement.dataset.tema = tema;
+                }
+            } catch (e) { /* memoria locale negata: resta il tema predefinito */ }
+        })();
+    </script>
+    <link rel="stylesheet" href="assets/site.css?v=5fa249b3">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Esplorando l'Inferno di Dante",
+            "inLanguage": "it",
+            "description": "Viaggio guidato nell'Inferno della Divina Commedia: i nove cerchi, le pene, i dannati più celebri e le tavole incise da Gustave Doré.",
+            "about": {
+                "@type": "Book",
+                "name": "Inferno",
+                "alternateName": "La Divina Commedia — Inferno",
+                "author": { "@type": "Person", "name": "Dante Alighieri" },
+                "illustrator": { "@type": "Person", "name": "Gustave Doré" },
+                "inLanguage": "it",
+                "isAccessibleForFree": true
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div id="progresso" aria-hidden="true"></div>
+<a class="salta-al-contenuto" href="#benvenuto">Salta al contenuto</a>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <span class="logo-fiamma" aria-hidden="true"></span>
+            <span class="logo-lungo">Esplorando l'</span><strong>Inferno</strong> di Dante
+        </a>
+        <nav aria-label="Navigazione principale">
+            <ul class="nav-links">
+                <li><a href="#benvenuto">Benvenuto</a></li>
+                <li><a href="#dante">Dante</a></li>
+                <li><a href="#struttura">Struttura</a></li>
+                <li><a href="#pene">Pene e dannati</a></li>
+                <li><a href="inferno.html">Testo integrale</a></li>
+            </ul>
+        </nav>
+        <div class="comandi">
+            <button type="button" class="controllo" data-azione="tema" aria-pressed="false">
+                <span class="icona-tema icona-sole" aria-hidden="true"></span>
+                <span class="icona-tema icona-luna" aria-hidden="true"></span>
+                <span data-etichetta-tema>Pergamena</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <!-- Copertina -->
+    <section id="copertina" class="copertina">
+        <img class="copertina-sfondo" src="assets/dore/canto-01-1.jpg" alt="" aria-hidden="true"
+             width="977" height="828" decoding="async" fetchpriority="high">
+        <div class="container copertina-interna">
+            <p class="occhiello">La prima cantica della Divina Commedia</p>
+            <h1>Nel mezzo del cammin di nostra vita<em>discesa nell'Inferno</em></h1>
+            <p class="copertina-sommario">
+                Trentaquattro canti, nove cerchi, un solo cammino: dalla selva oscura al gelo di
+                Cocito, guidati da Virgilio e illustrati dalle incisioni di Gustave Doré.
+            </p>
+            <div class="azioni">
+                <a class="btn btn-primo" href="inferno.html">Leggi il testo integrale →</a>
+                <a class="btn btn-secondo" href="#struttura">Esplora i nove cerchi ↓</a>
+            </div>
+            <p class="copertina-nota">
+                4.720 endecasillabi nell'originale volgare · 54 tavole incise da Gustave Doré
+            </p>
+        </div>
+    </section>
+
+    <!-- Benvenuto -->
+    <section id="benvenuto" class="sezione">
+        <div class="container">
+            <div class="sezione-testa">
+                <h2>Benvenuto nel regno di sotto</h2>
+            </div>
+            <div class="prosa">
+                <p>
+                    L'Inferno è la prima delle tre cantiche della <em>Divina Commedia</em>, il poema che
+                    Dante Alighieri compose negli anni dell'esilio, fra il 1308 e il 1320. Il viaggio
+                    comincia in una selva oscura, il venerdì santo del 1300, e si conclude con la risalita
+                    lungo il corpo di Lucifero, «a riveder le stelle».
+                </p>
+                <p>
+                    Il racconto è insieme geografia e giudizio: ogni peccato occupa un luogo preciso, e a
+                    ciascun luogo corrisponde una pena commisurata alla colpa secondo la legge del
+                    contrappasso. Attraverso i dannati che incontra — Francesca, Farinata, Brunetto,
+                    Ulisse, Ugolino — Dante interroga la storia del suo tempo: la Firenze dei guelfi e dei
+                    ghibellini, la Chiesa, l'impero, la fragilità dell'uomo.
+                </p>
+                <p>
+                    In questo sito trovi il testo integrale dei trentaquattro canti nell'originale volgare,
+                    l'indice interattivo dei cerchi e le tavole che Gustave Doré incise per l'Inferno fra il
+                    1861 e il 1868: ciascuna accostata ai versi che illustra.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dante e la Divina Commedia -->
+    <section id="dante" class="sezione sezione-alternata">
+        <div class="container">
+            <div class="sezione-testa">
+                <h2>Dante e la Divina Commedia</h2>
+            </div>
+            <div class="prosa">
+                <p>
+                    Dante Alighieri nasce a Firenze nel 1265 e muore a Ravenna nel 1321. Priore nel 1300,
+                    viene condannato all'esilio nel 1302 e non rivedrà mai più la sua città: la nostalgia e
+                    il rancore per Firenze attraversano tutto il poema, dove i fiorentini occupano un posto
+                    di primo piano tra i dannati.
+                </p>
+                <p>
+                    La <em>Commedia</em> è scritta in terzine di endecasillabi a rima incatenata (ABA BCB CDC),
+                    la forma metrica che Dante inventa per l'occasione. L'Inferno conta 4.720 versi; il
+                    Purgatorio e il Paradiso completano il poema per un totale di 14.233 versi.
+                </p>
+                <p>
+                    L'opera circolò prestissimo in copie manoscritte e, già nel Trecento, fu commentata da
+                    Jacopo della Lana e da Pietro Alighieri, figlio del poeta. Il titolo di «Divina» le fu
+                    aggiunto da Ludovico Dolce nell'edizione veneziana del 1555.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Incipit -->
+    <section id="incipit" class="sezione">
+        <div class="container">
+            <div class="sezione-testa">
+                <h2>Incipit della cantica</h2>
+            </div>
+            <blockquote class="citazione">
+                <p>
+                    Nel mezzo del cammin di nostra vita<br>
+                    mi ritrovai per una selva oscura,<br>
+                    ché la diritta via era smarrita.
+                </p>
+                <cite>— Inferno, canto I, versi 1–3</cite>
+            </blockquote>
+            <div class="prosa">
+                <p>
+                    Il poema si apre con lo smarrimento: l'uomo nel pieno della vita, a trentacinque anni,
+                    si accorge di aver perduto la via. La selva è insieme luogo reale e allegoria del
+                    peccato; la vetta illuminata dal sole è la felicità che l'uomo può raggiungere con la
+                    ragione, ma tre fiere — lonza, leone e lupa — gli sbarrano il cammino.
+                </p>
+                <p>
+                    Solo l'ombra di Virgilio, inviata da Beatrice, offrirà una via d'uscita: un itinerario
+                    che passa attraverso l'abisso. Il testo completo, canto per canto, è nella pagina
+                    dedicata: <a href="inferno.html">leggi l'Inferno integrale →</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Struttura geografica: mappa interattiva -->
+    <section id="struttura" class="sezione sezione-alternata">
+        <div class="container">
+            <div class="sezione-testa">
+                <h2>La struttura dell'Inferno</h2>
+                <p class="sezione-sommario">
+                    L'Inferno è un imbuto rovesciato che scende verso il centro della terra. Prima dei
+                    cerchi veri e propri si attraversa l'antinferno; in fondo, il ghiaccio di Cocito e
+                    il corpo di Lucifero.
+                </p>
+            </div>
+
+            <div class="mappa">
+                <div class="mappa-disegno">
+                    <svg viewBox="0 0 260 344" role="group" aria-label="Sezione dell'imbuto dell'Inferno, dal primo cerchio al nono">
+                        <defs>
+                            <!-- Una sola sfumatura per tutto l'imbuto, in coordinate
+                                 assolute: ogni livello pesca la sua parte, così il
+                                 disegno si fa più cupo scendendo. -->
+                            <linearGradient id="imbuto-cupo" gradientUnits="userSpaceOnUse" x1="0" y1="38" x2="0" y2="270">
+                                <stop offset="0" class="imbuto-alto"></stop>
+                                <stop offset="1" class="imbuto-fondo"></stop>
+                            </linearGradient>
+                            <radialGradient id="imbuto-centro" gradientUnits="userSpaceOnUse" cx="130" cy="288" r="40">
+                                <stop offset="0" class="centro-alto"></stop>
+                                <stop offset="1" class="centro-fondo"></stop>
+                            </radialGradient>
+                        </defs>
+                        <circle class="mappa-alone" cx="130" cy="288" r="40"></circle>
+                        <g class="cerchio" data-cerchio="0">
+                            <polygon class="anello" points="26,38 234,38 224,62 36,62"></polygon>
+                            <text class="mappa-numero" x="130" y="53">1</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="1">
+                            <polygon class="anello" points="36,64 224,64 214,88 46,88"></polygon>
+                            <text class="mappa-numero" x="130" y="79">2</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="2">
+                            <polygon class="anello" points="46,90 214,90 204,114 56,114"></polygon>
+                            <text class="mappa-numero" x="130" y="105">3</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="3">
+                            <polygon class="anello" points="56,116 204,116 194,140 66,140"></polygon>
+                            <text class="mappa-numero" x="130" y="131">4</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="4">
+                            <polygon class="anello" points="66,142 194,142 184,166 76,166"></polygon>
+                            <text class="mappa-numero" x="130" y="157">5</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="5">
+                            <polygon class="anello" points="76,168 184,168 174,192 86,192"></polygon>
+                            <text class="mappa-numero" x="130" y="183">6</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="6">
+                            <polygon class="anello" points="86,194 174,194 164,218 96,218"></polygon>
+                            <text class="mappa-numero" x="130" y="209">7</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="7">
+                            <polygon class="anello" points="96,220 164,220 154,244 106,244"></polygon>
+                            <text class="mappa-numero" x="130" y="235">8</text>
+                        </g>
+                        <g class="cerchio" data-cerchio="8">
+                            <polygon class="anello" points="106,246 154,246 144,270 116,270"></polygon>
+                            <text class="mappa-numero" x="130" y="261">9</text>
+                        </g>
+                        <circle class="mappa-centro" cx="130" cy="288" r="7"></circle>
+                        <text class="mappa-etichetta" x="130" y="19">selva oscura · porta · Acheronte</text>
+                        <text class="mappa-etichetta" x="130" y="334">Lucifero, al centro della terra</text>
+                    </svg>
+                    <p class="mappa-nota">
+                        Un livello per volta: tocca un trapezio — o una delle pastiglie qui sotto —
+                        per leggerne il nome, i dannati e la pena.
+                    </p>
+                </div>
+
+                <div class="mappa-scheda" id="scheda-cerchio" data-scheda-cerchio>
+                    <span class="scheda-numero" data-scheda-numero>1</span>
+                    <h3 data-scheda-nome>Limbo</h3>
+                    <noscript>
+                        <p class="scheda-avviso">
+                            Con JavaScript attivo, toccando un livello dell'imbuto compaiono qui i
+                            peccatori, la pena e i dannati che lo abitano. Senza, i nove cerchi
+                            restano comunque leggibili nell'elenco che segue.
+                        </p>
+                    </noscript>
+                    <dl data-scheda-campo hidden>
+                        <dt>Peccatori</dt>
+                        <dd data-scheda-peccatori>—</dd>
+                        <dt>Pena</dt>
+                        <dd data-scheda-pena>—</dd>
+                        <dt>Dannati celebri</dt>
+                        <dd data-scheda-dannati>—</dd>
+                    </dl>
+                    <p data-scheda-campo data-scheda-testo hidden>—</p>
+                    <a class="tavola-rimando" data-scheda-campo data-scheda-canti href="inferno.html#canto-4" hidden>—</a>
+                </div>
+            </div>
+
+            <ul class="elenco-cerchi" aria-label="Scegli un cerchio">
+                <li><button type="button" data-scelta-cerchio="0" aria-pressed="true">I · Limbo</button></li>
+                <li><button type="button" data-scelta-cerchio="1" aria-pressed="false">II · Lussuria</button></li>
+                <li><button type="button" data-scelta-cerchio="2" aria-pressed="false">III · Gola</button></li>
+                <li><button type="button" data-scelta-cerchio="3" aria-pressed="false">IV · Avarizia</button></li>
+                <li><button type="button" data-scelta-cerchio="4" aria-pressed="false">V · Ira</button></li>
+                <li><button type="button" data-scelta-cerchio="5" aria-pressed="false">VI · Eresia</button></li>
+                <li><button type="button" data-scelta-cerchio="6" aria-pressed="false">VII · Violenza</button></li>
+                <li><button type="button" data-scelta-cerchio="7" aria-pressed="false">VIII · Frode</button></li>
+                <li><button type="button" data-scelta-cerchio="8" aria-pressed="false">IX · Tradimento</button></li>
+            </ul>
+
+            <script type="application/json" data-dati-cerchi>
+            [
+              {
+                "numero": "I",
+                "nome": "Limbo",
+                "peccatori": "I non battezzati e i virtuosi pagani, morti senza il battesimo ma senza colpa personale.",
+                "pena": "Nessun tormento fisico: solo il sospiro eterno di chi vive senza speranza, nel desiderio di Dio che non potrà mai appagarsi.",
+                "dannati": "Omero, Orazio, Ovidio, Lucano, Elettra, Enea, Cesare, Aristotele, Socrate, Platone.",
+                "testo": "Oltre l'Acheronte si apre il primo cerchio, illuminato da un fuoco tenue: è il Limbo, dove abitano i poeti e i sapienti dell'antichità. Dante è accolto tra loro come sesto fra cotanto senno.",
+                "canti": "IV",
+                "cantoIniziale": 4
+              },
+              {
+                "numero": "II",
+                "nome": "Lussuria",
+                "peccatori": "I peccatori carnali, che sottoposero la ragione all'istinto.",
+                "pena": "Travolti senza posa dalla bufera infernale, che li sbatte e li percuote come il vento della passione.",
+                "dannati": "Semiramide, Didone, Cleopatra, Elena, Achille, Paride, Tristano, Paolo e Francesca.",
+                "testo": "Minosse, con la coda avvolta intorno al corpo, assegna a ciascuno il suo cerchio. Qui la tempesta non si ferma mai; nel mezzo della bufera Dante ascolta il racconto di Francesca da Rimini, e per la pietà cade come corpo morto.",
+                "canti": "V",
+                "cantoIniziale": 5
+              },
+              {
+                "numero": "III",
+                "nome": "Gola",
+                "peccatori": "I golosi, che fecero della gola il centro della loro vita.",
+                "pena": "Distesi in terra sotto una pioggia greve di acqua fetida e grandine, nel fango, straziati da Cerbero.",
+                "dannati": "Ciacco, il fiorentino che profetizza le discordie di Firenze.",
+                "testo": "Cerbero, il cane a tre gole, graffia e scuoia le anime; Virgilio lo calma gettandogli una manciata di terra. È il canto politico per eccellenza: Ciacco parla della lotta tra bianchi e neri, della superbia, dell'invidia e dell'avarizia dei fiorentini.",
+                "canti": "VI",
+                "cantoIniziale": 6
+              },
+              {
+                "numero": "IV",
+                "nome": "Avarizia e prodigalità",
+                "peccatori": "Gli avari e i prodighi, che non conobbero misura nell'uso dei beni.",
+                "pena": "Si spingono l'uno contro l'altro enormi pesi con la forza del petto, insultandosi: «Perché tieni?» e «Perché burli?».",
+                "dannati": "Nessun nome: solo la massa anonima degli avari e dei prodighi, e la Fortuna che «volve sua spera».",
+                "testo": "Il cerchio è guardato da Pluto, che Virgilio zittisce con una battuta. Nel quarto cerchio Dante incontra anche la dottrina della Fortuna, ministra di Dio, che distribuisce e toglie i beni del mondo senza che gli uomini possano opporvisi.",
+                "canti": "VII",
+                "cantoIniziale": 7
+              },
+              {
+                "numero": "V",
+                "nome": "Ira e accidia",
+                "peccatori": "Gli iracondi e gli accidiosi: i primi si percuotono nella palude Stigia, i secondi gorgogliano sotto il fango.",
+                "pena": "Immersi nella palude Stigia: gli iracondi si sbranano tra loro, gli accidiosi restano sommersi nel fango e possono parlare solo con un gorgoglio.",
+                "dannati": "Filippo Argenti, il fiorentino superbo che Dante respinge senza pietà.",
+                "testo": "Flegiàs traghetta i due poeti sulla palude Stigia, fino alle mura della città di Dite. Sulla riva si affacciano i diavoli, che chiudono le porte: il viaggio verso il male più grave comincia con un ostacolo.",
+                "canti": "VII–VIII",
+                "cantoIniziale": 8
+              },
+              {
+                "numero": "VI",
+                "nome": "Eresia",
+                "peccatori": "Gli eretici, e fra loro gli epicurei che dissero morta l'anima con il corpo.",
+                "pena": "Chiusi in tombe infocate, aperte e ardenti, dalla città di Dite in poi.",
+                "dannati": "Farinata degli Uberti, Cavalcante de' Cavalcanti, l'imperatore Federico II, papa Anastasio II.",
+                "testo": "Dentro le mura di Dite le tombe bruciano in eterno. Farinata, ghibellino fiero e magnanimo, si leva dal sepolcro e parla a Dante di Firenze e della sua vendetta; Cavalcante gli chiede del figlio Guido. Qui si spiega perché i dannati vedano il futuro ma non il presente.",
+                "canti": "IX–XI",
+                "cantoIniziale": 9
+              },
+              {
+                "numero": "VII",
+                "nome": "Violenza",
+                "peccatori": "I violenti contro il prossimo, contro se stessi e contro Dio, la natura e l'arte.",
+                "pena": "Nel Flegetonte i tiranni sono immersi nel sangue caldo, saettati dai centauri; nel bosco dei suicidi le anime sono alberi straziati dalle Arpie; sul sabbione infuocato cade una pioggia di fuoco.",
+                "dannati": "Pier delle Vigne, Capaneo, Brunetto Latini, Iacopo Rusticucci, Guido Guerra, Tegghiaio Aldobrandi.",
+                "testo": "Il settimo cerchio è tripartito: il fiume di sangue bollente, il bosco dei suicidi (dove chi si uccise si è trasformato in pianta) e il sabbione dove i violenti contro Dio bestemmiano, i sodomiti camminano e gli usurai siedono. Sullo sfondo emerge Gerione, la frode.",
+                "canti": "XII–XVII",
+                "cantoIniziale": 12
+              },
+              {
+                "numero": "VIII",
+                "nome": "Frode",
+                "peccatori": "I fraudolenti: chi ingannò chi non si fida, secondo dieci forme diverse di frode.",
+                "pena": "Dieci bolge scavate nella pietra: pece bollente, cappe di piombo, serpenti, fiamme parlanti, squarci e malattie.",
+                "dannati": "Ulisse e Diomede, Guido da Montefeltro, Maometto, Bertran de Born, Gianni Schicchi, maestro Adamo, Vanni Fucci, Caifàs.",
+                "testo": "Malebolge è il regno dell'ingegno perverso: ruffiani e seduttori, adulatori, simoniaci, indovini, barattieri, ipocriti, ladri, consiglieri fraudolenti, seminatori di discordia, falsari. Qui si incontra anche il canto politico più duro, quello di Maometto, e il folle volo di Ulisse oltre le colonne d'Ercole.",
+                "canti": "XVIII–XXX",
+                "cantoIniziale": 18
+              },
+              {
+                "numero": "IX",
+                "nome": "Tradimento",
+                "peccatori": "I traditori dei parenti, della patria, degli ospiti e dei benefattori.",
+                "pena": "Conficcati nel ghiaccio del Cocito, in quattro zone: Caina, Antenora, Ptolomea e Giudecca.",
+                "dannati": "Bocca degli Abati, il conte Ugolino e l'arcivescovo Ruggieri, Branca Doria, Giuda, Bruto e Cassio.",
+                "testo": "Il pozzo dei giganti immette nel lago ghiacciato di Cocito, dove il freddo ha spento ogni calore. Al centro, confitto nella ghiaccia, Lucifero maciulla i tre traditori più gravi; risalendo lungo il suo corpo, Dante e Virgilio escono a riveder le stelle.",
+                "canti": "XXXI–XXXIV",
+                "cantoIniziale": 31
+              }
+            ]
+            </script>
+        </div>
+    </section>
+
+    <!-- Pene e dannati -->
+    <section id="pene" class="sezione">
+        <div class="container">
+            <div class="sezione-testa">
+                <h2>Pene e dannati</h2>
+                <p class="sezione-sommario">
+                    La legge del contrappasso rovescia il peccato in pena: il libro e il bacio di
+                    Francesca, il cavallo di legno di Ulisse, il cranio di Ruggieri sotto i denti di
+                    Ugolino. Le tavole di Doré raccontano queste scene con la forza del teatro.
+                </p>
+            </div>
+
+            <div class="tavole">
+                <figure class="tavola da-comparire">
+                    <button type="button" class="tavola-immagine" data-tavola
+                            data-didascalia="Paolo e Francesca: il libro di Lancillotto, il bacio, la rovina dei due cognati."
+                            data-versi="Inferno, canto V, versi 133–135"
+                            data-credito="Incisione di Gustave Doré, 1861 — pubblico dominio (Wikimedia Commons)">
+                        <img src="assets/dore/canto-05-3.jpg" width="715" height="1083" loading="lazy" decoding="async"
+                             alt="Incisione di Doré: Paolo e Francesca avvolti dalla bufera infernale">
+                    </button>
+                    <figcaption>
+                        <strong>Francesca da Rimini</strong>
+                        Canto V. La bufera dei lussuriosi; il racconto del libro letto insieme e del
+                        bacio che segnò la loro rovina.
+                    </figcaption>
+                </figure>
+
+                <figure class="tavola da-comparire">
+                    <button type="button" class="tavola-immagine" data-tavola
+                            data-didascalia="Le fiamme dei consiglieri fraudolenti; tra loro la fiamma di Ulisse e Diomede: «de’ remi facemmo ali al folle volo»."
+                            data-versi="Inferno, canto XXVI, versi 46–51"
+                            data-credito="Incisione di Gustave Doré, 1861 — pubblico dominio (Wikimedia Commons)">
+                        <img src="assets/dore/canto-26-1.jpg" width="708" height="1097" loading="lazy" decoding="async"
+                             alt="Incisione di Doré: Ulisse e Diomede dentro una fiamma nell'ottava bolgia">
+                    </button>
+                    <figcaption>
+                        <strong>Ulisse</strong>
+                        Canto XXVI. Nell'ottava bolgia, tra i consiglieri fraudolenti, l'eroe racconta
+                        il folle volo oltre le colonne d'Ercole.
+                    </figcaption>
+                </figure>
+
+                <figure class="tavola da-comparire">
+                    <button type="button" class="tavola-immagine" data-tavola
+                            data-didascalia="Nella torre della fame, i figli si offrono al padre: Ugolino tace e si rode dentro."
+                            data-versi="Inferno, canto XXXIII, versi 61–63"
+                            data-credito="Incisione di Gustave Doré, 1861 — pubblico dominio (Wikimedia Commons)">
+                        <img src="assets/dore/canto-33-1.jpg" width="960" height="797" loading="lazy" decoding="async"
+                             alt="Incisione di Doré: Ugolino addenta il cranio di Ruggieri nel ghiaccio">
+                    </button>
+                    <figcaption>
+                        <strong>Il conte Ugolino</strong>
+                        Canto XXXIII. Dal ghiaccio di Antenora, Ugolino racconta la torre della fame:
+                        la più tragica delle storie infernali.
+                    </figcaption>
+                </figure>
+
+                <figure class="tavola da-comparire">
+                    <button type="button" class="tavola-immagine" data-tavola
+                            data-didascalia="«Ecco Dite»: davanti a Dante e Virgilio si leva Lucifero, «lo imperador del doloroso regno»."
+                            data-versi="Inferno, canto XXXIV, versi 19–21"
+                            data-credito="Incisione di Gustave Doré, 1861 — pubblico dominio (Wikimedia Commons)">
+                        <img src="assets/dore/canto-34-1.jpg" width="960" height="824" loading="lazy" decoding="async"
+                             alt="Incisione di Doré: Lucifero gigantesco confitto nel ghiaccio di Cocito">
+                    </button>
+                    <figcaption>
+                        <strong>Lucifero</strong>
+                        Canto XXXIV. Tre facce, sei ali di pipistrello, tre bocche che maciullano Giuda,
+                        Bruto e Cassio.
+                    </figcaption>
+                </figure>
+
+                <figure class="tavola da-comparire">
+                    <button type="button" class="tavola-immagine" data-tavola
+                            data-didascalia="Farinata degli Uberti si leva dal sepolcro infuocato degli eretici: «Chi fuor li maggior tui?»."
+                            data-versi="Inferno, canto X, versi 40–42"
+                            data-credito="Incisione di Gustave Doré, 1861 — pubblico dominio (Wikimedia Commons)">
+                        <img src="assets/dore/canto-10-1.jpg" width="700" height="1121" loading="lazy" decoding="async"
+                             alt="Incisione di Doré: Farinata emerge da un sarcofago infuocato">
+                    </button>
+                    <figcaption>
+                        <strong>Farinata</strong>
+                        Canto X. «Com' io al piè de la sua tomba fui»: il ghibellino che salvò Firenze
+                        e che non perdona agli esuli.
+                    </figcaption>
+                </figure>
+
+                <figure class="tavola da-comparire">
+                    <button type="button" class="tavola-immagine" data-tavola
+                            data-didascalia="Brunetto Latini prende Dante per la veste, tra i sodomiti del sabbione: «Siete voi qui, ser Brunetto?»."
+                            data-versi="Inferno, canto XV, versi 28–30"
+                            data-credito="Incisione di Gustave Doré, 1861 — pubblico dominio (Wikimedia Commons)">
+                        <img src="assets/dore/canto-15-1.jpg" width="960" height="788" loading="lazy" decoding="async"
+                             alt="Incisione di Doré: Brunetto Latini afferra la veste di Dante">
+                    </button>
+                    <figcaption>
+                        <strong>Brunetto Latini</strong>
+                        Canto XV. Il maestro di retorica di Dante, sotto la pioggia di fuoco, gli
+                        raccomanda il suo <em>Tesoro</em> e profetizza l'esilio.
+                    </figcaption>
+                </figure>
+            </div>
+
+            <p class="avviso">
+                Alle tavole di Doré si aggiungono, nella pagina del testo, i versi che ciascuna illustra:
+                aprine una per vederla a piena pagina, oppure tocca una terzina per copiarne il rimando
+                critico (per esempio <em>Inf. V, 134–135</em>).
+            </p>
+        </div>
+    </section>
+
+    <!-- Fine della cantica -->
+    <section id="fine" class="sezione sezione-alternata">
+        <div class="container">
+            <div class="sezione-testa">
+                <h2>Fine della cantica</h2>
+            </div>
+            <div class="prosa">
+                <p>
+                    Al centro della terra, nel punto più lontano da Dio, Lucifero è confitto nel ghiaccio.
+                    Dante e Virgilio si aggrappano al suo vello peloso e, passando per il «natural buco»,
+                    risalgono lungo la vena di roccia fino a riemergere sulla spiaggia dell'emisfero
+                    australe: è la mattina di Pasqua.
+                </p>
+            </div>
+            <blockquote class="citazione">
+                <p>
+                    Lo duca e io per quel cammino ascoso<br>
+                    intrammo a ritornar nel chiaro mondo;<br>
+                    e sanza cura aver d'alcun riposo,
+                </p>
+                <p>
+                    salimmo sù, el primo e io secondo,<br>
+                    tanto ch'i' vidi de le cose belle<br>
+                    che porta ’l ciel, per un pertugio tondo.
+                </p>
+                <cite>— Inferno, canto XXXIV, versi 133–138</cite>
+            </blockquote>
+            <div class="prosa">
+                <p>
+                    Il canto, e con esso la cantica, si chiude sul verso che è anche il ritorno alla vita:
+                    <a href="inferno.html#canto-34">«E quindi uscimmo a riveder le stelle»</a>.
+                </p>
+            </div>
+
+            <div class="tavole">
+                <figure class="tavola tavola-in-evidenza da-comparire">
+                    <button type="button" class="tavola-immagine" data-tavola
+                            data-didascalia="Per un cammino ascoso, lungo il corpo di Lucifero, i due poeti risalgono verso il chiaro mondo."
+                            data-versi="Inferno, canto XXXIV, versi 127–129"
+                            data-credito="Incisione di Gustave Doré, 1861 — pubblico dominio (Wikimedia Commons)">
+                        <img src="assets/dore/canto-34-2.jpg" width="500" height="765" loading="lazy" decoding="async"
+                             alt="Incisione di Doré: Dante e Virgilio risalgono lungo il corpo di Lucifero">
+                    </button>
+                    <figcaption>
+                        <strong>La risalita</strong>
+                        Canto XXXIV. «E quindi uscimmo a riveder le stelle»: la fine dell'Inferno e
+                        l'inizio del Purgatorio.
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-interno">
+        <p><strong>Esplorando l'Inferno di Dante</strong> — sito di studio sulla prima cantica.</p>
+        <p class="footer-fonte">
+            Testo: Divina Commedia di Dante Alighieri, pubblico dominio (XIV secolo), edizione di
+            riferimento da Wikisource. Incisioni: Gustave Doré (1832–1883), edizione Hachette 1861 e
+            ristampa Cassell 1892 — pubblico dominio, da Wikimedia Commons. Alcune tavole provengono
+            dall'edizione londinese del 1866 e conservano la didascalia incisa in inglese.
+        </p>
+        <p><a href="inferno.html">Testo integrale dei 34 canti →</a></p>
+    </div>
+</footer>
+
+<button type="button" class="torna-su" aria-label="Torna all'inizio della pagina" title="Torna su">↑</button>
+
+<script src="assets/site.js?v=5fa249b3"></script>
+</body>
+</html>
