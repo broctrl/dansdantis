@@ -29,6 +29,11 @@
     /* Poco seppia e un filo di contrasto: le incisioni restano leggibili
        senza il velo che prima impastava i mezzi toni. */
     --tavola-filtro: sepia(0.08) contrast(1.09) brightness(1.02);
+    /* Il testo scritto sopra l'incisione di copertina: più chiaro di quello
+       normale, perché sotto non ha il fondo della pagina ma un disegno. La
+       differenza non è un capriccio: su un mezzo tono il testo smorzato
+       richiede un velo quasi pieno, questo si accontenta di due terzi. */
+    --copertina-tenue: #ddcfba;
     /* Le icone sono sagome ritagliate da un tracciato, non emoji: l'emoji la
        disegna il sistema operativo (forma e colori diversi su ogni macchina,
        e sempre a colori) e non seguirebbe il tema. Così invece prendono il
@@ -36,6 +41,17 @@
     --icona-fiamma: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 20'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M8 .6C9.5 4.3 12.2 6.1 13.6 9c1 2 1.6 3 1.6 3.4a7.2 7.2 0 0 1-14.4 0c0-.4.6-1.4 1.6-3.4C3.8 6.1 6.5 4.3 8 .6ZM8 9.6c1 2.4 2.4 3.4 2.4 5.8a2.4 2.4 0 0 1-4.8 0c0-2.4 1.4-3.4 2.4-5.8Z'/%3E%3C/svg%3E");
     --icona-sole: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='3.3' fill='%23000'/%3E%3Cpath fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' d='M8 .9v1.7M8 13.4v1.7M.9 8h1.7M13.4 8h1.7M3.1 3.1l1.2 1.2M11.7 11.7l1.2 1.2M3.1 12.9l1.2-1.2M11.7 4.3l1.2-1.2'/%3E%3C/svg%3E");
     --icona-luna: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M9.4 1a6.5 6.5 0 1 0 5.6 9.9A5.2 5.2 0 0 1 9.4 1Z'/%3E%3C/svg%3E");
+    /* Anche i piccoli comandi sono disegnati: la croce, la freccia in cima e
+       l'ingrandisci erano caratteri (✕ ⤢ ↑) che ogni sistema rende con un
+       disegno suo, e che non prendevano il colore del comando. */
+    --icona-croce: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' d='M4 4l8 8M12 4l-8 8'/%3E%3C/svg%3E");
+    --icona-freccia-su: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M8 13.4V3.4M3.6 7.6L8 3.2l4.4 4.4'/%3E%3C/svg%3E");
+    --icona-ingrandisci: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' d='M9.6 2.4h4v4M13.6 2.4L8.8 7.2M6.4 13.6h-4v-4M2.4 13.6l4.8-4.8'/%3E%3C/svg%3E");
+    /* Il segnaposto che tiene il posto di un'incisione mentre arriva: un
+       cartoncino con una trama appena accennata, non un rettangolo vuoto. */
+    --scheletro-chiaro: color-mix(in srgb, var(--surface-2) 84%, var(--border-forte));
+    --scheletro-scuro: color-mix(in srgb, var(--surface) 88%, var(--border-forte));
+    --scheletro-trama: color-mix(in srgb, var(--border-forte) 42%, transparent);
     --raggio: 14px;
     --larghezza: 1160px;
     --colonna-testo: 38rem;
@@ -59,6 +75,9 @@ html[data-tema="chiaro"] {
     --alone: color-mix(in srgb, var(--accent) 14%, transparent);
     --ombra: 0 16px 36px -26px rgba(70, 45, 20, 0.65);
     --tavola-filtro: sepia(0.16) contrast(1.04) brightness(1.01);
+    /* Sulla pergamena il disegno è chiaro e il testo scuro: qui il tono
+       tenue è un bruno caldo, non un bianco spento. */
+    --copertina-tenue: #4a3a28;
     color-scheme: light;
 }
 
@@ -342,6 +361,35 @@ html[data-tema="chiaro"] .icona-sole {
     display: none;
 }
 
+/* Le sagome dei piccoli comandi: si riempiono con il colore del testo che
+   hanno attorno, quindi seguono il tema e lo stato (normale, passaggio,
+   fuoco) senza che nessuno debba scriverlo per ciascuna. L'ingrandisci della
+   tavola non è qui: vive sulla tavola stessa, e lì si porta il suo alone. */
+.icona-croce,
+.icona-freccia-su {
+    display: inline-block;
+    flex: none;
+    background: currentColor;
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+}
+
+.icona-croce {
+    width: 0.62em;
+    height: 0.62em;
+    -webkit-mask-image: var(--icona-croce);
+    mask-image: var(--icona-croce);
+}
+
+.icona-freccia-su {
+    width: 1.05em;
+    height: 1.05em;
+    -webkit-mask-image: var(--icona-freccia-su);
+    mask-image: var(--icona-freccia-su);
+}
+
+
+
 input.controllo::placeholder {
     color: var(--muted);
 }
@@ -555,55 +603,149 @@ input[type="search"]::-webkit-search-decoration {
 .copertina {
     position: relative;
     display: grid;
-    align-items: center;
-    min-height: min(88vh, 46rem);
-    padding-block: clamp(3.5rem, 8vw, 7rem);
+    /* Il testo in basso e l'incisione in alto, che si vede davvero. Prima era
+       tutto coperto da un velo uniforme: il disegno spariva e la copertina
+       sembrava una macchia scura. Ora il velo cresce verso il basso e diventa
+       pieno solo dove c'è da leggere. */
+    /* Due righe dichiarate: la fascia del disegno in alto, il testo in basso.
+       Così la copertina non dipende dall'altezza delle parole, e il velo sa
+       dove deve arrivare pieno. */
+    grid-template-rows: minmax(7rem, 34vh) auto;
+    align-items: end;
+    min-height: min(96vh, 46rem);
+    padding-block: 0 clamp(2.5rem, 6vw, 4rem);
     overflow: hidden;
     text-align: center;
     isolation: isolate;
+}
+
+/* Il luccichio del segnaposto anche qui, sulla prima cosa che si vede: la
+   copertina si disegna in alto, sopra il disegno e sotto il velo, e prende la
+   stessa rampa di scioglimento dell'immagine. Si accende con lo stesso
+   `data-attesa` delle tavole — lo script lo scrive quando il riquadro si
+   avvicina allo schermo — e sparisce da sé quando l'incisione arriva. */
+.copertina::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 55%;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+        100deg,
+        transparent 32%,
+        color-mix(in srgb, var(--text) 7%, transparent) 50%,
+        transparent 68%
+    );
+    background-size: 220% 100%;
+    background-position: 135% 0;
+    -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent);
+    mask-image: linear-gradient(180deg, #000 62%, transparent);
+}
+
+.copertina[data-attesa="true"]::before {
+    animation: scheletro-scorre 2.6s linear infinite;
+}
+
+.copertina[data-pronta="true"]::before,
+.copertina[data-errore="true"]::before {
+    animation: none;
+    opacity: 0;
 }
 
 /* L'illustrazione di sfondo è un <img> e non una background-image: così il
    percorso resta relativo al documento e non al foglio di stile. */
 .copertina-sfondo {
     position: absolute;
-    inset: 0;
+    inset: 0 0 auto;
     z-index: -2;
     width: 100%;
-    height: 100%;
+    /* La copertina è un riquadro verticale, l'incisione è orizzontale: a
+       tutta altezza il taglio di `cover` cade sui lati e resta scoperta
+       tutta l'altezza del disegno, cioè cielo e rupe sopra, figure dietro
+       al testo. Misurato sull'incisione del canto I: il tratto denso —
+       Dante, la lonza — sta fra il 55% e l'85% dell'altezza, e sotto il 90%
+       c'è carta bianca. Qui il disegno prende solo la fascia alta, con
+       l'altezza legata a quella della copertina, e l'inquadratura si sposta
+       con `object-position` sulla parte che ha qualcosa da mostrare. */
+    height: 55%;
     object-fit: cover;
-    object-position: center 35%;
-    filter: grayscale(0.1) sepia(0.12) contrast(1.1) brightness(1.06);
-    opacity: 0.82;
+    object-position: center 80%;
+    /* Il fondo della fascia si scioglie invece di tagliarsi: sotto c'è il
+       testo, e un orlo netto si vedrebbe come uno sbaglio. */
+    -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent);
+    mask-image: linear-gradient(180deg, #000 62%, transparent);
+    /* Il disegno si vede di più: prima il velo lo impastava, e la copertina
+       sembrava una macchia scura con sopra del testo. */
+    --copertina-filtro: grayscale(0.06) sepia(0.14) contrast(1.16) brightness(1.1);
+    filter: var(--copertina-filtro);
+    opacity: 0.9;
+    /* Anche la copertina ha il suo segnaposto: è la prima immagine della
+       pagina e pesa più di 300 KB. La trama però è più rada e più tenue di
+       quella delle tavole: su una superficie di tutta pagina il tratteggio
+       fitto della montatura diventa una rigatina da carta da parati, e il
+       segnaposto deve somigliare a un foglio in attesa, non a un tessuto. */
+    background-color: var(--scheletro-scuro);
+    background-image:
+        repeating-linear-gradient(135deg, color-mix(in srgb, var(--border-forte) 15%, transparent) 0 1px, transparent 1px 14px),
+        linear-gradient(160deg, var(--scheletro-chiaro), var(--scheletro-scuro));
 }
 
 /* Sul tema chiaro l'incisione ha bisogno di più corpo, non di meno: qui è
    stampata su carta, e il velo che la copre deve solo schiarirle il fondo. */
 html[data-tema="chiaro"] .copertina-sfondo {
     opacity: 0.92;
-    filter: grayscale(0.04) sepia(0.22) contrast(1.1) brightness(1.1);
+    --copertina-filtro: grayscale(0.04) sepia(0.22) contrast(1.1) brightness(1.1);
+    filter: var(--copertina-filtro);
 }
 
 .copertina::after {
     content: "";
-    position: absolute;
-    inset: 0;
+    /* Il velo è una riga della griglia, non un fondo assoluto: così sta
+       *dietro al testo* invece che dietro a una percentuale dell'altezza.
+       Prima la rampa era tarata in percentuale sulla copertina, e le righe di
+       testo si spostano con lo schermo: su una finestra bassa l'occhiello
+       finiva sopra il disegno e scendeva a 1,84 di contrasto, mentre su una
+       alta passava. Ancorato alla riga del testo, lo stesso foglio di stile
+       vale a ogni altezza. */
+    grid-row: 2;
+    align-self: stretch;
+    /* Sfuma anche un po' dentro la fascia del disegno, così l'incisione non
+       finisce contro una riga netta ma si spegne nel fondo. */
+    margin-top: -4rem;
     z-index: -1;
-    /* Il tepore dell'Inferno sale dal basso, ma si spegne prima dell'orlo:
-       se toccasse il bordo inferiore, scorrendo resterebbe una striscia
-       arancione appesa sotto la testata. */
-    background:
-        radial-gradient(ellipse 62% 30% at 50% 72%, color-mix(in srgb, var(--accent) 30%, transparent), transparent),
-        linear-gradient(180deg, color-mix(in srgb, var(--bg) 62%, transparent) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 45%, var(--bg) 100%);
+    pointer-events: none;
+    /* Le soglie sono in rem, cioè ancorate alla tipografia e non alla
+       finestra: a 4rem dal principio del velo comincia il testo, e lì il
+       fondo è già al 98%, quanto basta perché l'oro del tema chiaro
+       (5,03 sul fondo pieno) resti sopra il 4,5 anche nel suo pixel
+       peggiore — misurato 4,75 sulla riga dell'occhiello. Il resto della
+       rampa serve solo a sciogliere il disegno. */
+    background: linear-gradient(
+        180deg,
+        transparent 0,
+        color-mix(in srgb, var(--bg) 42%, transparent) 1.4rem,
+        color-mix(in srgb, var(--bg) 82%, transparent) 2.8rem,
+        color-mix(in srgb, var(--bg) 98%, transparent) 4rem,
+        var(--bg) 5.4rem
+    );
 }
 
-html[data-tema="chiaro"] .copertina::after {
-    background:
-        radial-gradient(ellipse 62% 30% at 50% 72%, color-mix(in srgb, var(--accent) 18%, transparent), transparent),
-        linear-gradient(180deg, color-mix(in srgb, var(--bg) 62%, transparent) 0%, color-mix(in srgb, var(--bg) 76%, transparent) 52%, var(--bg) 100%);
+
+
+/* Ora che del disegno se ne vede di più, il testo porta con sé un alone del
+   colore del fondo: sulle zone di mezzo tono resta leggibile lo stesso. */
+.occhiello,
+.copertina h1,
+.copertina-sommario,
+.copertina-nota {
+    text-shadow:
+        0 1px 22px color-mix(in srgb, var(--bg) 82%, transparent),
+        0 1px 3px color-mix(in srgb, var(--bg) 55%, transparent);
 }
 
 .copertina-interna {
+    grid-row: 2;
     max-width: 46rem;
     margin-inline: auto;
 }
@@ -629,7 +771,7 @@ html[data-tema="chiaro"] .copertina::after {
 }
 
 .copertina-sommario {
-    color: var(--muted);
+    color: var(--copertina-tenue);
     font-size: 1.08rem;
     margin-inline: auto;
     margin-bottom: 2rem;
@@ -685,7 +827,7 @@ html[data-tema="chiaro"] .copertina::after {
 .copertina-nota {
     margin-top: 2.2rem;
     font-size: 0.85rem;
-    color: var(--muted);
+    color: var(--copertina-tenue);
 }
 
 /* --------------------------------------------------------------------------
@@ -805,42 +947,106 @@ html[data-tema="chiaro"] .copertina::after {
     position: relative;
     display: block;
     width: 100%;
-    padding: 0;
-    background: var(--surface);
+    /* La montatura: un filo di carta attorno all'incisione, come in un volume
+       a stampa. È anche il segnaposto — mentre l'immagine arriva si vede
+       questo, non un rettangolo vuoto — e la trama a 45 gradi è quella delle
+       carte da incisione. */
+    padding: clamp(0.4rem, 1.3vw, 0.7rem);
+    background-color: var(--scheletro-scuro);
+    background-image:
+        repeating-linear-gradient(135deg, var(--scheletro-trama) 0 1px, transparent 1px 9px),
+        linear-gradient(160deg, var(--scheletro-chiaro), var(--scheletro-scuro));
     border: 1px solid var(--border);
     border-radius: var(--raggio);
     overflow: hidden;
     cursor: zoom-in;
     box-shadow: var(--ombra);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.25s ease;
+}
+
+/* Il luccichio del segnaposto: sta sotto l'immagine, quindi sparisce da sé
+   quando l'incisione si disegna sopra; lo script ne sa di più (data-pronta) e
+   lo spegne prima, per non lasciare un'animazione a girare a vuoto. Non gira
+   però dappertutto: in questa pagina ci sono cinquantaquattro tavole, e
+   cinquantaquattro animazioni contemporanee sono lavoro sprecato per un
+   disegno che nessuno guarda. Lo script accende `data-attesa` solo sui
+   riquadri vicini allo sguardo — senza di lui il segnaposto resta, fermo,
+   una carta da incisione. */
+.tavola-immagine::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        100deg,
+        transparent 32%,
+        color-mix(in srgb, var(--text) 6%, transparent) 50%,
+        transparent 68%
+    );
+    background-size: 220% 100%;
+    /* Fuori dal riquadro quando è fermo: senza animazione non si vede nulla. */
+    background-position: 135% 0;
+    pointer-events: none;
+}
+
+.tavola-immagine[data-attesa="true"]::before {
+    animation: scheletro-scorre 2.6s linear infinite;
+}
+
+.tavola-immagine[data-pronta="true"]::before,
+.tavola-immagine[data-errore="true"]::before {
+    animation: none;
+    opacity: 0;
+}
+
+@keyframes scheletro-scorre {
+    from {
+        background-position: 135% 0;
+    }
+    to {
+        background-position: -35% 0;
+    }
 }
 
 /* Le incisioni si mostrano per intero: nessun ritaglio, solo la cornice. */
 .tavola-immagine img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: auto;
+    border: 1px solid var(--border);
+    border-radius: 3px;
     filter: var(--tavola-filtro);
-    transition: transform 0.5s ease, filter 0.4s ease;
+    transition: filter 0.35s ease;
+}
+
+/* Il foglio intero si solleva di un soffio, invece di far scivolare
+   l'incisione dentro la sua montatura. */
+.tavola-immagine:hover,
+.tavola-immagine:focus-visible {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--oro) 50%, var(--border));
+    box-shadow: 0 24px 48px -26px rgba(0, 0, 0, 0.95);
 }
 
 .tavola-immagine:hover img,
 .tavola-immagine:focus-visible img {
-    transform: scale(1.035);
-    filter: sepia(0.1) contrast(1.08) brightness(1);
+    filter: sepia(0.1) contrast(1.1) brightness(1.03);
 }
 
+/* L'invito a ingrandire, disegnato: compare al passaggio e al fuoco da
+   tastiera, e ha un alone scuro perché resti leggibile su una stampa chiara. */
 .tavola-immagine::after {
-    content: "⤢";
+    content: "";
     position: absolute;
-    right: 0.6rem;
-    bottom: 0.6rem;
-    width: 2rem;
-    height: 2rem;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--bg) 72%, transparent);
-    color: var(--oro);
-    font-size: 0.95rem;
+    right: calc(clamp(0.4rem, 1.3vw, 0.7rem) + 0.5rem);
+    bottom: calc(clamp(0.4rem, 1.3vw, 0.7rem) + 0.5rem);
+    z-index: 2;
+    width: 1.35rem;
+    height: 1.35rem;
+    background: var(--oro);
+    -webkit-mask: var(--icona-ingrandisci) center / contain no-repeat;
+    mask: var(--icona-ingrandisci) center / contain no-repeat;
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.85));
     opacity: 0;
     transition: opacity 0.25s ease;
 }
@@ -1502,6 +1708,14 @@ html[data-tema="chiaro"] .copertina::after {
     border: 1px solid #3a2e26;
     border-radius: 6px;
     box-shadow: 0 30px 80px -30px #000;
+    /* Anche qui il segnaposto: le tavole sono grandi e la prima apertura
+       aspetta il file, quindi il posto è già quello giusto — le misure
+       arrivano dalla miniatura — e la trama dice che sta arrivando. */
+    background-color: var(--scheletro-scuro);
+    background-image:
+        repeating-linear-gradient(135deg, var(--scheletro-trama) 0 1px, transparent 1px 9px),
+        linear-gradient(160deg, var(--scheletro-chiaro), var(--scheletro-scuro));
+    transition: opacity 0.35s ease;
 }
 
 /* Con un riquadro modale aperto la pagina di fondo non scorre. */
@@ -1647,7 +1861,6 @@ body.modale-aperto {
     height: 2.9rem;
     display: grid;
     place-items: center;
-    font-size: 1.1rem;
     color: var(--text);
     background: color-mix(in srgb, var(--surface) 92%, transparent);
     border: 1px solid var(--border);
@@ -1691,6 +1904,50 @@ body.modale-aperto {
     from {
         opacity: 0;
         transform: translateY(1.4rem);
+    }
+}
+
+/* La dissolvenza di un'immagine che arriva: si aggiunge all'arrivo e lo
+   script la toglie subito dopo, così a decidere se si vede resta lo stato
+   normale. Non tocca il filtro delle incisioni, che è un'altra cosa. */
+img.appena-arrivata {
+    animation: immagine-entra 0.55s ease;
+}
+
+@keyframes immagine-entra {
+    from {
+        opacity: 0;
+    }
+}
+
+/* L'incisione in una tavola non compare soltanto: si posa. Opacità e
+   ingrandimento, cioè due proprietà che il motore di disegno compone da sé,
+   perché con cinquanta tavole in pagina una sfocatura per ciascuna sarebbe
+   cara. Il movimento è di un punto e mezzo per cento: si vede appena, ed è
+   quello che serve perché l'arrivo non sembri uno scatto. */
+.tavola-immagine img.appena-arrivata {
+    animation: tavola-entra 0.6s ease;
+}
+
+@keyframes tavola-entra {
+    from {
+        opacity: 0;
+        transform: scale(1.015);
+    }
+}
+
+/* La copertina invece è una sola, grande, ed è la prima cosa che si vede:
+   qui la sfocatura si può permettere, perché è l'incisione che si mette a
+   fuoco sotto il titolo. Il filtro di partenza è quello vero del tema, così
+   la messa a fuoco non cambia il colore del disegno. */
+.copertina-sfondo.appena-arrivata {
+    animation: copertina-fuoco 0.9s ease;
+}
+
+@keyframes copertina-fuoco {
+    from {
+        opacity: 0;
+        filter: blur(20px) var(--copertina-filtro);
     }
 }
 

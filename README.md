@@ -72,6 +72,41 @@ all'ultima cosa toccata. I colori stanno sopra il rapporto 4,5:1 chiesto dalle l
 in entrambi i temi, le animazioni si spengono con `prefers-reduced-motion`, e nessun
 contenuto dipende da una dissolvenza per comparire.
 
+## Come compare la pagina
+
+Le incisioni sono cinquantaquattro e pesano 12,6 MB: nessuna si scarica prima che serva
+(`loading="lazy"`), e mentre arriva al suo posto c'è un segnaposto — la montatura della tavola
+stessa, con la trama della carta da incisione — non un rettangolo vuoto. Le misure dichiarate
+nel documento tengono già l'ingombro, quindi l'arrivo non sposta nulla.
+
+Il luccichio del segnaposto gira solo sui riquadri vicini allo sguardo: con cinquantaquattro
+tavole in pagina, un'animazione per ciascuna sarebbe lavoro sprecato per un disegno che
+nessuno guarda. Lo accende il copione (`data-attesa`) quando il riquadro si avvicina allo
+schermo, e lo spegne quando l'immagine arriva o fallisce. La stessa cosa vale per la
+copertina, che si disegna per prima.
+
+All'arrivo l'incisione non compare di colpo: si posa — opacità e un ingrandimento di un punto
+e mezzo per cento, due proprietà che il motore di disegno compone da sé, perché su cinquanta
+tavole una sfocatura per ciascuna sarebbe cara. La copertina, che è una sola e grande, si
+concede anche la messa a fuoco: entra sfocata e si fa nitida.
+
+## La copertina, misurata invece che scelta a occhio
+
+Il riquadro della copertina è verticale e l'incisione è orizzontale: a tutta altezza `cover`
+taglia i lati e mostra invece tutta l'altezza del disegno, cioè cielo e rupe sopra e figure
+dietro al testo. Il disegno prende quindi solo la fascia alta (il 55% dell'altezza), con
+l'inquadratura spostata dove c'è qualcosa da guardare: sull'incisione del canto I il tratto
+denso — Dante, la lonza — sta fra il 55% e l'85% dell'altezza, e sotto il 90% c'è carta
+bianca. Il fondo della fascia si scioglie con una maschera, così non finisce contro un orlo
+netto.
+
+Il velo che separa il disegno dal testo non è un fondo assoluto ma **una riga della
+griglia**: sta dietro al blocco di testo, e le sue soglie sono in `rem`, cioè ancorate alla
+tipografia e non all'altezza della finestra. In percentuale dell'altezza della copertina le
+stesse dosi sbagliavano su schermi bassi, dove l'occhiello finiva sul tratto scuro del
+disegno e scendeva a 1,84 di contrasto mentre su schermi alti passava; ancorata alla riga,
+l'occhiello sta a 4,82 nel tema pergamena e 10,22 nel notturno, e il resto con margine.
+
 Ogni pagina porta descrizione, Open Graph, Twitter Card e un blocco JSON-LD (`WebSite` in
 copertina, `Book` nel testo integrale). L'indirizzo pubblico sta **in un posto solo**,
 `tools/sito.json`: da lì si ricavano il `<link rel="canonical">`, `og:url`, l'indirizzo
